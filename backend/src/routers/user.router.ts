@@ -8,6 +8,7 @@ import bcrypt from 'bcryptjs'
 
 const router = Router()
 
+// USER || SEED
 router.get('/seed', asyncHandler(
     async (req, res) => {
         const usersCount = await UserModel.countDocuments()
@@ -21,6 +22,8 @@ router.get('/seed', asyncHandler(
     }
 ))
 
+
+// USER || LOGIN
 router.post('/login', asyncHandler(
     async (req, res) => {
         const { email, password } = req.body
@@ -34,6 +37,7 @@ router.post('/login', asyncHandler(
     }
 ))
 
+// USER || REGISTER
 router.post('/register', asyncHandler(
     async (req, res) => {
         const { name, email, password } = req.body
@@ -58,6 +62,7 @@ router.post('/register', asyncHandler(
     }
 ))
 
+// JWT TOKEN
 const generateTokenResponse = (user: User) => {
     const token = jwt.sign({
         email: user.email, isAdmin: user.isAdmin
