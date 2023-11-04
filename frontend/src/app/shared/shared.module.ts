@@ -5,6 +5,7 @@ import { InputValidationComponent } from './component/input-validation/input-val
 import { TextInputComponent } from './component/text-input/text-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DefaultButtonComponent } from './component/default-button/default-button.component';
+import { LoadingComponent } from './component/loading/loading.component';
 
 
 
@@ -13,7 +14,8 @@ import { DefaultButtonComponent } from './component/default-button/default-butto
     InputContainerComponent,
     InputValidationComponent,
     TextInputComponent,
-    DefaultButtonComponent
+    DefaultButtonComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { DefaultButtonComponent } from './component/default-button/default-butto
     InputContainerComponent,
     InputValidationComponent,
     TextInputComponent,
-    DefaultButtonComponent
+    DefaultButtonComponent,
+    LoadingComponent
   ]
 })
 export class SharedModule { }
