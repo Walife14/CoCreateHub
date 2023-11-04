@@ -5,6 +5,18 @@ import { Project, ProjectModel } from '../models/project.model'
 
 const router = Router()
 
+// PROJECT || GET ALL PROJECTS
+router.get('/', asyncHandler(
+    async(req, res) => {
+        try {
+            const projects = await ProjectModel.find({})
+            res.status(200).send(projects)
+        } catch(error) {
+            res.status(404).send("Couldn't find any projects!")
+        }
+    }
+))
+
 // PROJECT || CREATE
 router.post('/create', asyncHandler(
     async (req, res) => {
