@@ -30,6 +30,7 @@ export const ProjectSchema = new Schema<Project>({
         name: String,
         isProjectAdmin: Boolean
     }], required: true},
+    projectCreator: {type: {id: String, email: String, name: String, isProjectAdmin: Boolean}},
     githubUrl: {type: String || null, required: false},
     liveUrl: {type: String || null, required: false},
     logoUrl: {type: String || null, required: false},
