@@ -15,7 +15,7 @@ const routes: Routes = [
     component: DashboardLayoutComponent
   },
   // Fall back if no route is matched
-  { path: '**', redirectTo: '/auth', pathMatch: 'full'}
+  { path: '**', redirectTo: '/auth/login', pathMatch: 'full'}
 ];
 
 @NgModule({

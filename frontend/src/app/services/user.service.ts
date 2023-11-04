@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { User } from '../shared/models/User';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
+import { IUserRegister } from '../shared/interfaces/IUserRegister';
 import { HttpClient } from '@angular/common/http'
-import { USER_LOGIN_URL } from '../shared/constants/urls';
+import { USER_LOGIN_URL, USER_REGISTER_URL } from '../shared/constants/urls';
 import { ToastrService } from 'ngx-toastr';
 
 const USER_KEY = 'User'
@@ -32,6 +33,24 @@ export class UserService {
         },
         error: (errorResponse) => {
           this.toastrService.error(errorResponse.error, 'Login Failed')
+        }
+      })
+    )
+  }
+
+  register(userRegister: IUserRegister): Observable<User> {
+    return this.http.post<User>(USER_REGISTER_URL, userRegister).pipe(
+      tap({
+        next: (user) => {
+          this.setUserToLocalStorage(user)
+          this.userSubject.next(user)
+          this.toastrService.success(
+            `Welcome to CoCreateHub ${user.name}`,
+            'Register successful'
+          )
+        },
+        error: (errorResponse) => {
+          this.toastrService.error(errorResponse.error, 'Register Failed')
         }
       })
     )

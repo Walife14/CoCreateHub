@@ -1,4 +1,5 @@
 <div>
+  <h1>Login</h1>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <text-input
       [control]="fc.email"
@@ -14,4 +15,5 @@
     </text-input>
     <default-button text="Login"></default-button>
   </form>
+  <span>Don't have an account? Click <a class="underline" routerLink='/auth/register' [queryParams]="{returnUrl}">here</a> to register.</span>
 </div>
