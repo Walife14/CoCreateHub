@@ -1,0 +1,9 @@
+<h1 class="text-3xl text-center">Projects</h1>
+<ul>
+  <li class="border my-2 mx-2 p-2" *ngFor="let project of projects">
+    <a [routerLink]="project.id">
+      <span>{{ project.title }}</span>
+      <p>{{ project.description }}</p>
+    </a>
+  </li>
+</ul>

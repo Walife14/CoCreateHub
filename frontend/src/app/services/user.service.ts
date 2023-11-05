@@ -5,7 +5,6 @@ import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
 import { HttpClient } from '@angular/common/http'
 import { USER_LOGIN_URL, USER_REGISTER_URL } from '../shared/constants/urls';
-import { ToastrService } from 'ngx-toastr';
 
 const USER_KEY = 'User'
 @Injectable({
@@ -16,7 +15,7 @@ export class UserService {
   public userObservable: Observable<User>
 
 
-  constructor(private http: HttpClient, private toastrService: ToastrService) {
+  constructor(private http: HttpClient) {
     this.userObservable = this.userSubject.asObservable()
   }
 
@@ -30,13 +29,13 @@ export class UserService {
         next: (user) => {
           this.setUserToLocalStorage(user)
           this.userSubject.next(user)
-          this.toastrService.success(
+          console.log(
             `Welcome to CoCreateHub ${user.name}`,
             'Login successful'
           )
         },
         error: (errorResponse) => {
-          this.toastrService.error(errorResponse.error, 'Login Failed')
+          console.log('Login Failed')
         }
       })
     )
@@ -48,13 +47,13 @@ export class UserService {
         next: (user) => {
           this.setUserToLocalStorage(user)
           this.userSubject.next(user)
-          this.toastrService.success(
+          console.log(
             `Welcome to CoCreateHub ${user.name}`,
             'Register successful'
           )
         },
         error: (errorResponse) => {
-          this.toastrService.error(errorResponse.error, 'Register Failed')
+          console.log('Register Failed')
         }
       })
     )

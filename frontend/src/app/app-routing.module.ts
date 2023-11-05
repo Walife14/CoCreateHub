@@ -5,6 +5,7 @@ import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout.component';
 import { authGuard } from './shared/guards/auth.guard';
 import { userGuard } from './shared/guards/user.guard';
+import { DashboardRoutingModule } from './modules/dashboard/dashboard-routing.module';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardLayoutComponent,
+    loadChildren: () => DashboardRoutingModule,
     canActivate: [authGuard]
   },
   // Fall back if no route is matched

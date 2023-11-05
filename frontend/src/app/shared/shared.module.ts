@@ -6,6 +6,8 @@ import { TextInputComponent } from './component/text-input/text-input.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DefaultButtonComponent } from './component/default-button/default-button.component';
 import { LoadingComponent } from './component/loading/loading.component';
+import { NavComponent } from './component/nav/nav.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
@@ -15,19 +17,22 @@ import { LoadingComponent } from './component/loading/loading.component';
     InputValidationComponent,
     TextInputComponent,
     DefaultButtonComponent,
-    LoadingComponent
+    LoadingComponent,
+    NavComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   exports: [
     InputContainerComponent,
     InputValidationComponent,
     TextInputComponent,
     DefaultButtonComponent,
-    LoadingComponent
+    LoadingComponent,
+    NavComponent
   ]
 })
 export class SharedModule { }

@@ -8,7 +8,6 @@ import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './modules/auth/auth.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
-import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
@@ -27,12 +26,8 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     AuthModule,
-    DashboardModule,
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-bottom-right',
-      newestOnTop: false
-    })
+    SharedModule,
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
