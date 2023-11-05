@@ -1,8 +1,11 @@
-<h1 class="text-3xl text-center">Projects</h1>
+<div class="text-center">
+  <h1 class="text-3xl mb-2">Projects</h1>
+  <a class="text-xl underline" routerLink="new">Create a new project</a>
+</div>
 <ul>
   <li class="border my-2 mx-2 p-2" *ngFor="let project of projects">
     <a [routerLink]="project.id">
-      <span>{{ project.title }}</span>
+      <span class="text-2xl font-semibold">{{ project.title }}</span>
       <p>{{ project.description }}</p>
     </a>
   </li>

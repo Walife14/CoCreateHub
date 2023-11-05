@@ -20,11 +20,10 @@ router.get('/', asyncHandler(
 // PROJECT || CREATE
 router.post('/create', asyncHandler(
     async (req, res) => {
-        const { title, description, createdAt, members, projectCreator,
-                githubUrl, liveUrl, logoUrl, backgroundUrl
-        } = req.body
-        
         try {
+            const { title, description, createdAt, members, projectCreator,
+                githubUrl, liveUrl, logoUrl, backgroundUrl
+            } = req.body
 
             const newProject: Project = {
                 id: '',
@@ -40,11 +39,11 @@ router.post('/create', asyncHandler(
             }
 
             const dbProject = await ProjectModel.create(newProject)
-            res.status(200).send('Created new project!')
+            res.status(200).send({"message": "New project created successfully", "created project": newProject})
 
 
         } catch (error) {
-            res.status(HTTP_BAD_REQUEST).send("We couldn't create the project!")
+            res.status(HTTP_BAD_REQUEST).send({"message": "We couldn't create the project!"})
         }
 
     }

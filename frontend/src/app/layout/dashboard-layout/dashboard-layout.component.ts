@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/shared/models/User';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -9,23 +7,13 @@ import { User } from 'src/app/shared/models/User';
 })
 export class DashboardLayoutComponent implements OnInit {
 
-  user!: User;
-
-  constructor(private userService: UserService) {
-    userService.userObservable.subscribe((newUser) => {
-      this.user = newUser
-    })
-  }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  logout() {
-    this.userService.logout()
-  }
-
-  get isAuth() {
-    return this.user.token
-  }
+  // get isAuth() {
+  //   return this.user.token
+  // }
 
 }

@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { PROJECT_FETCH_ALL_URL } from '../shared/constants/urls';
+import { PROJECT_CREATE_URL, PROJECT_FETCH_ALL_URL } from '../shared/constants/urls';
 import { Project } from '../shared/interfaces/Project';
+import { IProjectCreate } from '../shared/interfaces/IProjectCreate';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   getProjects(): Observable<Project[]> {
-    return this.http.get<any>(PROJECT_FETCH_ALL_URL).pipe(
+    return this.http.get<Project[]>(PROJECT_FETCH_ALL_URL).pipe(
       tap({
         next: (projects) => {
           console.log('We got all the projects!')
@@ -22,5 +23,9 @@ export class ProjectService {
         }
       })
     )
+  }
+
+  createProject(newProject: IProjectCreate): Observable<IProjectCreate> {
+    return this.http.post<IProjectCreate>(PROJECT_CREATE_URL, newProject)
   }
 }
