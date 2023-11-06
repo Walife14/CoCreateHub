@@ -100,7 +100,13 @@ const generateTokenResponse = (user: User) => {
         email: user.email,
         name: user.name,
         isAdmin: user.isAdmin,
-        token: token        
+        token: token,
+        bio: user?.bio || undefined,
+        githubUrl: user?.githubUrl || undefined,
+        linkedinUrl: user?.linkedinUrl || undefined,
+        projectGoals: user?.projectGoals || undefined,
+        websiteUrl: user?.websiteUrl || undefined,
+        techs: user?.techs
     }
 }
 

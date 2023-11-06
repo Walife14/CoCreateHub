@@ -23,10 +23,11 @@ export class EditProfileComponent implements OnInit {
       websiteUrl: (''),
       linkedinUrl: (''),
       githubUrl: (''),
-      techs: fb.array([])
+      techs: fb.array([], Validators.required)
     })
 
     userService.userObservable.subscribe((user: User) => {
+      console.log(user)
       this.currentUserId = user.id
     })
   }
@@ -44,7 +45,7 @@ export class EditProfileComponent implements OnInit {
 
   addTech() {
     const techForm = this.fb.group({
-      tech: ['', Validators.required]
+      tech: ['']
     })
 
     this.techs.push(techForm)
@@ -67,10 +68,12 @@ export class EditProfileComponent implements OnInit {
       bio: fv.bio,
       projectGoals: fv.projectGoals,
       websiteUrl: fv.websiteUrl,
-      linkedinUrl: fv.linkedInUrl,
+      linkedinUrl: fv.linkedinUrl,
       githubUrl: fv.githubUrl,
       techs: fv.techs
     }
+
+    console.log(updatedProfile)
 
     this.userService.update(updatedProfile).subscribe((e) => {
       console.log(e)
