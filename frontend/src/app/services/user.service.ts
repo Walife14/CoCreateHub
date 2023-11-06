@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
 import { HttpClient } from '@angular/common/http'
-import { USER_LOGIN_URL, USER_REGISTER_URL } from '../shared/constants/urls';
+import { USER_LOGIN_URL, USER_REGISTER_URL, USER_UPDATE_URL } from '../shared/constants/urls';
 
 const USER_KEY = 'User'
 @Injectable({
@@ -73,5 +73,19 @@ export class UserService {
     const userJson = localStorage.getItem(USER_KEY)
     if(userJson) return JSON.parse(userJson) as User
     return new User()
+  }
+
+  // make an interface for updatedData and put it into the edit-profile component aswell
+  update(updatedData: any): Observable<any> {
+    return this.http.put<any>(USER_UPDATE_URL, updatedData).pipe(
+      tap({
+        next: (update) => {
+          console.log("successfully updated user", update)
+        },
+        error: (errorResponse) => {
+          "failed to update user"
+        }
+      })
+    )
   }
 }

@@ -1,0 +1,55 @@
+<div class="mt-10 mx-2">
+  <h1 class="text-xl font-semibold">Edit Profile</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <text-input
+      [control]="fc.bio"
+      [showErrorsWhen]="isSubmitted"
+      type="text"
+      label="Bio">
+    </text-input>
+    <text-input
+      [control]="fc.projectGoals"
+      [showErrorsWhen]="isSubmitted"
+      type="text"
+      label="Project goals">
+    </text-input>
+    <text-input
+      [control]="fc.websiteUrl"
+      [showErrorsWhen]="isSubmitted"
+      type="text"
+      label="Website">
+    </text-input>
+    <text-input
+      [control]="fc.linkedinUrl"
+      [showErrorsWhen]="isSubmitted"
+      type="text"
+      label="Linkedin">
+    </text-input>
+    <text-input
+      [control]="fc.githubUrl"
+      [showErrorsWhen]="isSubmitted"
+      type="text"
+      label="GitHub">
+    </text-input>
+
+    <div>
+      <div>Please add the tech you know. (HTML, CSS, JavaScript...)</div>
+      <ng-container formArrayName="techs">
+        <ng-container *ngFor="let techForm of techs.controls;  let i = index">
+          <div class="relative my-2" [formGroupName]="i">
+            <input class="h-full w-full p-2 pr-7 border border-black outline-none" type="text" formControlname="tech" placeholder="tech...">
+            <button class="w-5 absolute right-1 top-1/2 -translate-y-1/2" type="button" (click)="deleteTech(i)"><img src="../../../../../../assets/x-mark.svg"></button>
+          </div>
+        </ng-container>
+        <button type="button" (click)="addTech()">
+          <img class="w-7 my-2" src="../../../../../../assets/plus.svg">
+        </button>
+      </ng-container>
+    </div>
+
+
+    <default-button text="Update"></default-button>
+  </form>
+
+</div>

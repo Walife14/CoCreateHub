@@ -4,6 +4,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { ProjectComponent } from './pages/project/project.component';
 import { CreateProjectComponent } from './pages/create-project/create-project.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,14 @@ const routes: Routes = [
   {
     path: 'projects/:id',
     component: ProjectComponent
+  },
+  {
+    path: 'profile/edit',
+    component: EditProfileComponent
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent
   },
   // fallback if there is no route match
   { path: '**', redirectTo: '', pathMatch: 'full'}

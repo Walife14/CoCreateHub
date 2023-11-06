@@ -4,6 +4,7 @@
     </a>
     <nav class="flex gap-2 ml-auto">
         <a routerLink="projects">Projects</a>
+        <a [routerLink]="'profile/' + user.id">My Profile</a>
         <a (click)="logout()">Logout</a>
     </nav>
 </header>

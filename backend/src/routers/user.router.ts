@@ -62,6 +62,31 @@ router.post('/register', asyncHandler(
     }
 ))
 
+// USER || UPDATE PROFILE
+router.put('/update', asyncHandler(
+    async (req, res) => {
+        try {
+            const { id, bio, githubUrl, linkedinUrl, projectGoals, techs, websiteUrl } = req.body
+
+            const updatedFields = {
+                bio,
+                githubUrl,
+                linkedinUrl,
+                projectGoals,
+                websiteUrl,
+                techs
+            }
+
+            const updatedUser = await UserModel.findByIdAndUpdate(id, {$set: updatedFields})
+            res.status(200).send({'message': 'Successfully updated user'})
+        } catch(error) {
+            res.status(400).send({'message': 'Failed to update user', 'error': error})
+        }
+
+
+    }
+))
+
 // JWT TOKEN
 const generateTokenResponse = (user: User) => {
     const token = jwt.sign({
