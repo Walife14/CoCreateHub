@@ -13,21 +13,19 @@ export class ProfileComponent implements OnInit {
 
   isProfileUser = true;
 
-  isEditing = false;
-
   constructor(private userService: UserService) {
-    userService.userObservable.subscribe((user: User) => {
-      this.user = user
-      console.log(this.user)
+
+    // have to fetch using id because the subscribe for userObservable fetches the token data
+    // which would be outdated if the user edits their profile
+    userService.userObservable.subscribe((user) => {
+      userService.getUserById(user.id).subscribe((user: User) => {
+        this.user = user
+        console.log(this.user)
+      })
     })
   }
 
   ngOnInit() {
-  }
-
-  toggleEdit() {
-    this.isEditing = !this.isEditing
-    console.log("We're editing this bad boy now!")
   }
 
 }

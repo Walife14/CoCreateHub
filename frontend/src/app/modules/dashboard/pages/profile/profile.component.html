@@ -1,39 +1,54 @@
 <div class="mx-2 mt-10">
-  <div class="relative">
-    <h1 class="text-3xl font-semibold">{{ user.name }}</h1>
-    <a class="absolute right-0 top-0 text-sm underline" routerLink="/dashboard/profile/edit">Edit Profile</a>
-    <p>Your bio!</p>
-  </div>
+  <ng-container *ngIf="user">
+    <div class="relative">
+      <h1 class="text-3xl font-semibold">{{ user.name }}</h1>
+      <a class="absolute right-0 top-0 text-sm underline" routerLink="/dashboard/profile/edit">Edit Profile</a>
+      <p>{{ user.bio }}</p>
+    </div>
 
-  <div class="flex items-center gap-2 my-10">
-    <img class="h-10" src="../../../../../assets/tools.svg">
-    <span>No tech tools added yet!</span>
-  </div>
+    <div class="flex items-center gap-2 my-10">
+      <img class="h-10" src="../../../../../assets/tools.svg">
+      <ul *ngIf="user.techs && user.techs.length > 0; else noTech" class="flex gap-2 flex-wrap">
+        <li *ngFor="let tech of user.techs">
+          {{ tech }}
+        </li>
+      </ul>
+      <ng-template #noTech>
+        <span>No tech tools added yet!</span>
+      </ng-template>
+    </div>
 
-  <div>
-    <ul class="flex gap-10 justify-center">
-      <li>
-        <img class="w-10" src="../../../../../assets/github-mark.svg">
-      </li>
-      <li>
-        <img class="w-10" src="../../../../../assets/globe.svg">
-      </li>
-      <li>
-        <img class="w-10" src="../../../../../assets/linkedin-mark.svg">
-      </li>
-    </ul>
-  </div>
+    <div>
+      <ul class="flex gap-10 justify-center">
+        <li>
+          <a [href]="user.githubUrl" target="_blank">
+            <img class="w-10" src="../../../../../assets/github-mark.svg">
+          </a>
+        </li>
+        <li>
+          <a [href]="user.websiteUrl" target="_blank">
+            <img class="w-10" src="../../../../../assets/globe.svg">
+          </a>
+        </li>
+        <li>
+          <a [href]="user.linkedinUrl" target="_blank">
+            <img class="w-10" src="../../../../../assets/linkedin-mark.svg">
+          </a>
+        </li>
+      </ul>
+    </div>
 
-  <div class="my-10">
-    <p>I&#39;d really like to be able to join projects that would help me with my design skills using css/sass, so if you have something that I could join in on and work on improving my css skills, hit me up with a project invite!</p>
-  </div>
+    <div class="my-10">
+      <p>{{ user.projectGoals }}</p>
+    </div>
 
-  <div>
-    <h2 class="text-xl font-semibold">Projects</h2>
-    <ul class="flex gap-2">
-      <li>CrimeWatch</li>
-      <li>Car-toon</li>
-    </ul>
-    <button class="border px-2 py-1 my-4" type="button">Invite to project</button>
-  </div>
+    <div>
+      <h2 class="text-xl font-semibold">Projects</h2>
+      <ul class="flex gap-2">
+        <li>CrimeWatch</li>
+        <li>Car-toon</li>
+      </ul>
+      <button class="border px-2 py-1 my-4" type="button">Invite to project</button>
+    </div>
+  </ng-container>
 </div>
