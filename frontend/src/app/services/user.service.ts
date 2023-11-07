@@ -3,8 +3,8 @@ import { User } from '../shared/models/User';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
-import { HttpClient } from '@angular/common/http'
-import { USER_LOGIN_URL, USER_REGISTER_URL, USER_UPDATE_URL } from '../shared/constants/urls';
+import { HttpClient, HttpParams } from '@angular/common/http'
+import { USER_BY_ID_URL, USER_LOGIN_URL, USER_REGISTER_URL, USER_UPDATE_URL } from '../shared/constants/urls';
 
 const USER_KEY = 'User'
 @Injectable({
@@ -87,5 +87,10 @@ export class UserService {
         }
       })
     )
+  }
+
+  
+  getUserById(id: string): Observable<any> {
+    return this.http.get<User>(USER_BY_ID_URL + id)
   }
 }

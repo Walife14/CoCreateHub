@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/User';
 
@@ -12,11 +13,12 @@ export class EditProfileComponent implements OnInit {
 
   form!: FormGroup;
 
+  currentUser?: any;
   currentUserId?: string;
 
   isSubmitted = false;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.form = fb.group({
       bio: (''),
       projectGoals: (''),
@@ -26,10 +28,14 @@ export class EditProfileComponent implements OnInit {
       techs: fb.array([], Validators.required)
     })
 
-    userService.userObservable.subscribe((user: User) => {
-      console.log(user)
-      this.currentUserId = user.id
-    })
+    this.currentUserId = JSON.parse(localStorage.getItem('User') ?? '{}').id
+
+    if (this.currentUserId) {
+      userService.getUserById(this.currentUserId).subscribe((user: User) => {
+        this.fillInputs(user)
+      })
+    }
+
   }
 
   ngOnInit() {
@@ -43,12 +49,23 @@ export class EditProfileComponent implements OnInit {
     return this.form.controls["techs"] as FormArray
   }
 
-  addTech() {
-    const techForm = this.fb.group({
-      tech: ['']
-    })
+  fillInputs(user: User) {
+      this.currentUser = user
+      this.fc.bio.setValue(user.bio)
+      this.fc.projectGoals.setValue(user.projectGoals)
+      this.fc.websiteUrl.setValue(user.websiteUrl)
+      this.fc.linkedinUrl.setValue(user.linkedinUrl)
+      this.fc.githubUrl.setValue(user.githubUrl)
 
-    this.techs.push(techForm)
+      for(let i = 0; i < user.techs!.length; i++) {
+        this.addTech(user.techs![i])
+      }
+  }
+
+  addTech(value?: string) {
+    const techControl = new FormControl(value ? value : '')
+
+    this.techs.push(techControl)
   }
 
   deleteTech(techIndex: number) {
@@ -57,14 +74,14 @@ export class EditProfileComponent implements OnInit {
 
 
   onSubmit() {
+    if (!this.currentUser) return
 
-    if(!this.currentUserId) return
     this.isSubmitted = true
     
     const fv = this.form.value
 
     const updatedProfile = {
-      id: this.currentUserId,
+      id: this.currentUser.id,
       bio: fv.bio,
       projectGoals: fv.projectGoals,
       websiteUrl: fv.websiteUrl,
@@ -73,11 +90,17 @@ export class EditProfileComponent implements OnInit {
       techs: fv.techs
     }
 
-    console.log(updatedProfile)
-
-    this.userService.update(updatedProfile).subscribe((e) => {
-      console.log(e)
-    })
+    this.userService.update(updatedProfile).subscribe(
+      (response) => {
+        console.log(response)
+        setTimeout(() => {
+          this.router.navigate(['/dashboard/profile/' + this.currentUserId])
+        }, 1000)
+      },
+      (error) => {
+        console.error(error)
+      }
+    )
   }
 
 }

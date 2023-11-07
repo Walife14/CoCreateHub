@@ -36,9 +36,9 @@
     <div>
       <div>Please add the tech you know. (HTML, CSS, JavaScript...)</div>
       <ng-container formArrayName="techs">
-        <ng-container *ngFor="let techForm of techs.controls; let i = index">
-          <div class="relative my-2" [formGroupName]="i">
-            <input class="h-full w-full p-2 pr-7 border border-black outline-none" type="text" formControlName="tech">
+        <ng-container *ngFor="let tech of techs.controls; let i = index">
+          <div class="relative my-2">
+            <input class="h-full w-full p-2 pr-7 border border-black outline-none" type="text" [formControlName]="i">
             <button class="w-5 absolute right-1 top-1/2 -translate-y-1/2" type="button" (click)="deleteTech(i)"><img src="../../../../../../assets/x-mark.svg"></button>
           </div>
         </ng-container>

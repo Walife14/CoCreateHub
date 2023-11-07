@@ -87,6 +87,36 @@ router.put('/update', asyncHandler(
     }
 ))
 
+// USER || GET USER BY ID
+router.get('/user/:id', asyncHandler(
+    async (req, res) => {
+        try {
+            const { id } = req.params
+            
+            const fullUser = await UserModel.findById(id)
+
+            if (fullUser) {
+                const user = {
+                    id: fullUser.id,
+                    name: fullUser.name,
+                    email: fullUser.email,
+                    bio: fullUser.bio,
+                    githubUrl: fullUser.githubUrl,
+                    linkedinUrl: fullUser.linkedinUrl,
+                    projectGoals: fullUser.projectGoals,
+                    websiteUrl: fullUser.websiteUrl,
+                    techs: fullUser.techs,
+                    isAdmin: fullUser.isAdmin
+                }
+    
+                res.status(200).send(user)
+            }
+        } catch(error) {
+            res.status(400).send({'message': 'Failed to get user by id'})
+        }
+    }
+))
+
 // JWT TOKEN
 const generateTokenResponse = (user: User) => {
     const token = jwt.sign({
