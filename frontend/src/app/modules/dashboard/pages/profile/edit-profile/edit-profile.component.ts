@@ -82,13 +82,17 @@ export class EditProfileComponent implements OnInit {
     
     const fv = this.form.value
 
+    const GHUrl = this.ensureHttpOrHttps(fv.githubUrl)
+    const LIUrl = this.ensureHttpOrHttps(fv.linkedinUrl)
+    const websiteUrl = this.ensureHttpOrHttps(fv.websiteUrl)
+
     const updatedProfile = {
       id: this.currentUser.id,
       bio: fv.bio,
       projectGoals: fv.projectGoals,
-      websiteUrl: fv.websiteUrl,
-      linkedinUrl: fv.linkedinUrl,
-      githubUrl: fv.githubUrl,
+      websiteUrl: websiteUrl,
+      linkedinUrl: LIUrl,
+      githubUrl: GHUrl,
       visibility: fv.visibility,
       techs: fv.techs
     }
@@ -104,6 +108,19 @@ export class EditProfileComponent implements OnInit {
         console.error(error)
       }
     )
+  }
+
+  ensureHttpOrHttps(input: string | undefined): string | undefined {
+    if (input) {
+      if (input.startsWith('http://') || input.startsWith('https://')) {
+        return input;
+      } else {
+        return 'http://' + input
+      }
+    } else {
+      return input
+    }
+
   }
 
 }

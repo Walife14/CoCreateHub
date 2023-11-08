@@ -108,7 +108,8 @@ router.get('/user/:id', asyncHandler(
                     projectGoals: fullUser.projectGoals,
                     websiteUrl: fullUser.websiteUrl,
                     techs: fullUser.techs,
-                    isAdmin: fullUser.isAdmin
+                    isAdmin: fullUser.isAdmin,
+                    visibility: fullUser.visibility
                 }
     
                 res.status(200).send(user)
