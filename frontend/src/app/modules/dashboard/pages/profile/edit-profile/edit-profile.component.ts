@@ -25,6 +25,7 @@ export class EditProfileComponent implements OnInit {
       websiteUrl: (''),
       linkedinUrl: (''),
       githubUrl: (''),
+      visibility: (false),
       techs: fb.array([], Validators.required)
     })
 
@@ -56,6 +57,7 @@ export class EditProfileComponent implements OnInit {
       this.fc.websiteUrl.setValue(user.websiteUrl)
       this.fc.linkedinUrl.setValue(user.linkedinUrl)
       this.fc.githubUrl.setValue(user.githubUrl)
+      this.fc.visibility.setValue(user.visibility)
 
       for(let i = 0; i < user.techs!.length; i++) {
         this.addTech(user.techs![i])
@@ -87,9 +89,10 @@ export class EditProfileComponent implements OnInit {
       websiteUrl: fv.websiteUrl,
       linkedinUrl: fv.linkedinUrl,
       githubUrl: fv.githubUrl,
+      visibility: fv.visibility,
       techs: fv.techs
     }
-
+        
     this.userService.update(updatedProfile).subscribe(
       (response) => {
         console.log(response)

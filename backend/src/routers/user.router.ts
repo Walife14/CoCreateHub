@@ -54,7 +54,8 @@ router.post('/register', asyncHandler(
             name,
             email: email.toLowerCase(),
             password: encryptedPassword,
-            isAdmin: false
+            isAdmin: false,
+            visibility: false
         }
 
         const dbUser = await UserModel.create(newUser)
@@ -66,7 +67,7 @@ router.post('/register', asyncHandler(
 router.put('/update', asyncHandler(
     async (req, res) => {
         try {
-            const { id, bio, githubUrl, linkedinUrl, projectGoals, techs, websiteUrl } = req.body
+            const { id, bio, githubUrl, linkedinUrl, projectGoals, techs, websiteUrl, visibility } = req.body
 
             const updatedFields = {
                 bio,
@@ -74,7 +75,8 @@ router.put('/update', asyncHandler(
                 linkedinUrl,
                 projectGoals,
                 websiteUrl,
-                techs
+                techs,
+                visibility
             }
 
             const updatedUser = await UserModel.findByIdAndUpdate(id, {$set: updatedFields})

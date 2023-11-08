@@ -32,7 +32,15 @@
       type="text"
       label="GitHub">
     </text-input>
-
+    <div>
+      <span>Visibility: </span>
+      <label>
+        <input type="radio" formControlName="visibility" [value]="true"> True
+      </label>
+      <label>
+        <input type="radio" formControlName="visibility" [value]="false"> False
+      </label>
+    </div>
     <div>
       <div>Please add the tech you know. (HTML, CSS, JavaScript...)</div>
       <ng-container formArrayName="techs">

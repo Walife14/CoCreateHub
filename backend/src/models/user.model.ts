@@ -12,6 +12,7 @@ export interface User {
     projectGoals?: string;
     websiteUrl?: string;
     techs?: string[];
+    visibility: boolean;
 }
 
 // export interface UserUpdate {
@@ -34,6 +35,7 @@ export const UserSchema = new Schema<User>({
     projectGoals: {type: String, required: false},
     techs: {type: [String], required: false},
     websiteUrl: {type: String, required: false},
+    visibility: {type: Boolean, required: true, default: false}
 }, {
     timestamps: true,
     toJSON: {

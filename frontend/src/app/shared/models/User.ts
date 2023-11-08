@@ -4,6 +4,7 @@ export class User {
     name!: string;
     token?: string;
     isAdmin!: boolean;
+    visibility!: boolean;
     bio?: string;
     techs?: string[];
     websiteUrl?: string;
