@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import asyncHandler from 'express-async-handler'
-import { HTTP_BAD_REQUEST } from '../constant/http_status'
+import { HTTP_BAD_REQUEST, HTTP_NOT_FOUND } from '../constant/http_status'
 import { Project, ProjectModel } from '../models/project.model'
 
 const router = Router()
@@ -46,6 +46,22 @@ router.post('/create', asyncHandler(
             res.status(HTTP_BAD_REQUEST).send({"message": "We couldn't create the project!"})
         }
 
+    }
+))
+
+// PROJECTS || GET PROJECT BY ID
+router.get('/project/:id', asyncHandler(
+    async (req, res) => {
+        try {
+            const { id } = req.params
+
+            const project: Project = await ProjectModel.findById(id).select("-members.email").select("-projectCreator.email")
+
+            res.status(200).send(project)
+            // res.status(200).send({"message": "Successfully found project with id", project})
+        } catch(error) {
+            res.status(HTTP_NOT_FOUND).send({"message": "Could not find or fetch project"})
+        }
     }
 ))
 
