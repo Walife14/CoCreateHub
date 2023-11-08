@@ -67,20 +67,32 @@ router.post('/register', asyncHandler(
 router.put('/update', asyncHandler(
     async (req, res) => {
         try {
-            const { id, bio, githubUrl, linkedinUrl, projectGoals, techs, websiteUrl, visibility } = req.body
+            const { id, bio, githubUrl, linkedinUrl, projectGoals, techs, websiteUrl, visibility, newProject } = req.body
 
-            const updatedFields = {
-                bio,
-                githubUrl,
-                linkedinUrl,
-                projectGoals,
-                websiteUrl,
-                techs,
-                visibility
+            // check if we're only adding a project to the user projects array if not then just update user info
+            if (newProject) {
+
+                const userToAddProject = await UserModel.findById(id)
+                userToAddProject?.projects?.push(newProject)
+                userToAddProject?.save()
+                res.status(200).send({"message": "successfully added project to user"})
+
+            } else {
+
+                const updatedFields = {
+                    bio,
+                    githubUrl,
+                    linkedinUrl,
+                    projectGoals,
+                    websiteUrl,
+                    techs,
+                    visibility
+                }
+    
+                const updatedUser = await UserModel.findByIdAndUpdate(id, {$set: updatedFields})
+                res.status(200).send({'message': 'Successfully updated user'})
+                
             }
-
-            const updatedUser = await UserModel.findByIdAndUpdate(id, {$set: updatedFields})
-            res.status(200).send({'message': 'Successfully updated user'})
         } catch(error) {
             res.status(400).send({'message': 'Failed to update user', 'error': error})
         }

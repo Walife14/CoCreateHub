@@ -4,13 +4,14 @@ import { Observable, tap } from 'rxjs';
 import { PROJECT_CREATE_URL, PROJECT_FETCH_ALL_URL, PROJECT_FETCH_BY_ID } from '../shared/constants/urls';
 import { Project } from '../shared/interfaces/Project';
 import { IProjectCreate } from '../shared/interfaces/IProjectCreate';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   getProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(PROJECT_FETCH_ALL_URL).pipe(
@@ -26,7 +27,23 @@ export class ProjectService {
   }
 
   createProject(newProject: IProjectCreate): Observable<IProjectCreate> {
-    return this.http.post<IProjectCreate>(PROJECT_CREATE_URL, newProject)
+    return this.http.post<IProjectCreate>(PROJECT_CREATE_URL, newProject).pipe(
+      tap({
+        next: (project) => {
+          // Add the project to the creators/users DB document
+          const newProject = {
+            id: project.id,
+            title: project.title,
+            description: project.description
+          }
+
+          this.userService.update({id: project.projectCreator.id, newProject: newProject}).subscribe()
+        },
+        error: (errorResponse) => {
+          console.error("Failed:" + errorResponse.error)
+        }
+      })
+    )
   }
 
   getProjectById(id: string): Observable<Project> {

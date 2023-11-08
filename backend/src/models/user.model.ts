@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose'
+import { Project } from './project.model';
 
 export interface User {
     id: string;
@@ -13,16 +14,22 @@ export interface User {
     websiteUrl?: string;
     techs?: string[];
     visibility: boolean;
+    projects?: Project[];
 }
 
-// export interface UserUpdate {
-//     bio: string;
+// export interface Project {
+//     id: string;
+//     title: string;
+//     description: string;
+//     createdAt: Date;
+//     members: ProjectUser[];
+//     projectCreator: ProjectUser;
 //     githubUrl: string;
-//     linkedinUrl: string;
-//     projectGoals: string;
-//     websiteUrl: string;
-//     techs: string[]
+//     liveUrl: string;
+//     logoUrl: string;
+//     backgroundUrl: string;
 // }
+
 
 export const UserSchema = new Schema<User>({
     name: {type: String, required: true},
@@ -35,7 +42,10 @@ export const UserSchema = new Schema<User>({
     projectGoals: {type: String, required: false},
     techs: {type: [String], required: false},
     websiteUrl: {type: String, required: false},
-    visibility: {type: Boolean, required: true, default: false}
+    visibility: {type: Boolean, required: true, default: false},
+    projects: {type: [{
+        id: String, title: String, description: String, liveUrl: String, logoUrl: String, backgroundUrl: String
+    }]}
 }, {
     timestamps: true,
     toJSON: {

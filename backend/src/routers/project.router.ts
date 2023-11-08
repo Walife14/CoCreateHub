@@ -39,7 +39,8 @@ router.post('/create', asyncHandler(
             }
 
             const dbProject = await ProjectModel.create(newProject)
-            res.status(200).send({"message": "New project created successfully", "created project": newProject})
+            // res.status(200).send({"message": "New project created successfully", "createdProject": dbProject})
+            res.status(200).send(dbProject)
 
 
         } catch (error) {
