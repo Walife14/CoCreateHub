@@ -22,7 +22,7 @@ const routes: Routes = [
     component: CreateProjectComponent
   },
   {
-    path: 'projects/:id',
+    path: 'projects/project/:id',
     component: ProjectComponent
   },
   {

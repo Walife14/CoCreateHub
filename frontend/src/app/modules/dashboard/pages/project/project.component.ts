@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProjectService } from 'src/app/services/project.service';
+import { Project } from 'src/app/shared/interfaces/Project';
 
 @Component({
   selector: 'app-project',
@@ -7,7 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectComponent implements OnInit {
 
-  constructor() { }
+  project!: Project;
+
+  currentProjectId?: string;
+
+  constructor(private projectService: ProjectService, private activatedRoute: ActivatedRoute) {
+
+    this.currentProjectId = activatedRoute.snapshot.paramMap.get('id')!
+
+    projectService.getProjectById(this.currentProjectId).subscribe((project: Project) => {
+      this.project = project
+    })
+
+  }
 
   ngOnInit() {
   }

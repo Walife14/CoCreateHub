@@ -4,7 +4,7 @@
 </div>
 <ul>
   <li class="border my-2 mx-2 p-2" *ngFor="let project of projects">
-    <a [routerLink]="project.id">
+    <a [routerLink]="'project/' + project.id">
       <span class="text-2xl font-semibold">{{ project.title }}</span>
       <p>{{ project.description }}</p>
     </a>
