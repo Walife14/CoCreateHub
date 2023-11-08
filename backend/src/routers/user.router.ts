@@ -124,7 +124,7 @@ router.get('/user/:id', asyncHandler(
 router.get('/active-buddies', asyncHandler(
     async (req, res) => {
         try {
-            const users = await UserModel.find({ visibility: false })
+            const users = await UserModel.find({ visibility: true })
                 .select("-isAdmin").select("-createdAt").select("-__v").select("-updatedAt")
                 .select("-email")
 

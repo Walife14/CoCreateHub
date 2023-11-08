@@ -6,6 +6,7 @@ import { ProjectComponent } from './pages/project/project.component';
 import { CreateProjectComponent } from './pages/create-project/create-project.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
+import { FindCocreateBuddyComponent } from './pages/find-cocreate-buddy/find-cocreate-buddy.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'profile/:id',
     component: ProfileComponent
+  },
+  {
+    path: 'find-buddy',
+    component: FindCocreateBuddyComponent
   },
   // fallback if there is no route match
   { path: '**', redirectTo: '', pathMatch: 'full'}

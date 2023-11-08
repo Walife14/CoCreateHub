@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
+import { FindCocreateBuddyComponent } from './pages/find-cocreate-buddy/find-cocreate-buddy.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.
     ProjectComponent,
     CreateProjectComponent,
     ProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    FindCocreateBuddyComponent
   ],
   imports: [
     CommonModule,

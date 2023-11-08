@@ -11,6 +11,8 @@ export const USER_UPDATE_URL = BASE_URL + '/api/users/update'
 
 export const USER_BY_ID_URL = BASE_URL + '/api/users/user/'
 
+export const USER_VISIBLE_TRUE_URL = BASE_URL + '/api/users/active-buddies'
+
 // PROJECT
 
 export const PROJECT_FETCH_ALL_URL = BASE_URL + '/api/projects'
