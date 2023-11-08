@@ -120,6 +120,22 @@ router.get('/user/:id', asyncHandler(
     }
 ))
 
+// USER || USERS WITH VISIBILITY ON && TECHS?
+router.get('/active-buddies', asyncHandler(
+    async (req, res) => {
+        try {
+            const users = await UserModel.find({ visibility: false })
+                .select("-isAdmin").select("-createdAt").select("-__v").select("-updatedAt")
+                .select("-email")
+
+            res.status(200).send(users)
+
+        } catch(error) {
+            res.status(400).send({'message': 'Failed to find active CoCreate buddies'})
+        }
+    }
+))
+
 // JWT TOKEN
 const generateTokenResponse = (user: User) => {
     const token = jwt.sign({
