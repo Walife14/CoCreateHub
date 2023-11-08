@@ -1,3 +1,37 @@
-<p>
-  project works!
-</p>
+<div class="mx-2">
+  <ng-container *ngIf="project; else noProject">
+    <div class="text-center">
+      <h1 class="text-3xl font-semibold">{{ project.title }}</h1>
+      <p>{{ project.description }}</p>
+    </div>
+
+    <div class="text-center my-5">
+      <ul>
+        <li>Techs not yet added to project - SOON</li>
+      </ul>
+    </div>
+
+    <div class="my-5">
+      <ul class="flex gap-10 justify-center">
+        <li>
+          <a [href]="project.githubUrl" target="_blank">
+            <img class="w-10" src="../../../../../assets/github-mark.svg">
+          </a>
+        </li>
+        <li>
+          <a [href]="project.liveUrl" target="_blank">
+            <img class="w-10" src="../../../../../assets/globe.svg">
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="my-5">
+      <button class="block mx-auto" type="button">Members</button>
+      <span>(Clicking would cause members modal to appear with members)</span>
+    </div>
+  </ng-container>
+  <ng-template #noProject>
+    <h1>Sorry we couldn't find your project!</h1>
+  </ng-template>
+</div>
