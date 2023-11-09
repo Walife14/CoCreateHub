@@ -21,17 +21,17 @@
     <div>
       <ul class="flex gap-10 justify-center">
         <li>
-          <a [href]="user.githubUrl" target="_blank">
+          <a [href]="user.githubUrl" target="_blank" [ngClass]="user.githubUrl ? '' : 'pointer-events-none'">
             <img class="w-10" src="../../../../../assets/github-mark.svg">
           </a>
         </li>
         <li>
-          <a [href]="user.websiteUrl" target="_blank">
+          <a [href]="user.websiteUrl" target="_blank" [ngClass]="user.websiteUrl ? '' : 'pointer-events-none'">
             <img class="w-10" src="../../../../../assets/globe.svg">
           </a>
         </li>
         <li>
-          <a [href]="user.linkedinUrl" target="_blank">
+          <a [href]="user.linkedinUrl" target="_blank" [ngClass]="user.linkedinUrl ? '' : 'pointer-events-none'">
             <img class="w-10" src="../../../../../assets/linkedin-mark.svg">
           </a>
         </li>
