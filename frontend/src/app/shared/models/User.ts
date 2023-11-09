@@ -1,3 +1,5 @@
+import { Project } from "../interfaces/Project";
+
 export class User {
     id!: string;
     email!: string;
@@ -11,4 +13,5 @@ export class User {
     projectGoals?: string;
     linkedinUrl?: string;
     githubUrl?: string;
+    projects!: Project[];
 }

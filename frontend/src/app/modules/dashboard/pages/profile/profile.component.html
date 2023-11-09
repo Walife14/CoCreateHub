@@ -44,11 +44,19 @@
 
     <div>
       <h2 class="text-xl font-semibold">Projects</h2>
-      <ul class="flex gap-2">
-        <li>CrimeWatch</li>
-        <li>Car-toon</li>
+      <ul class="grid grid-cols-2 gap-10 my-4">
+        <li *ngFor="let project of user.projects">
+          <div class="border border-black">
+            <div class="text-center text-xl">{{ project.title }}</div>
+            <div class="h-32 w-full bg-gray-200"></div>
+            <div class="flex flex-row-reverse">
+              <a [routerLink]="'/dashboard/projects/project/' + project.id" class="p-2 rounded-full hover:bg-yellow-300/25"><img class="w-6 h-6" src="../../../../../assets/arrow-right.svg"></a>
+            </div>
+          </div>
+        </li>
       </ul>
-      <button class="border px-2 py-1 my-4" type="button">Invite to project</button>
     </div>
+
+    <button class="border px-2 py-1 my-4" type="button">Invite to project</button>
   </ng-container>
 </div>
