@@ -1,19 +1,24 @@
-<div>
-  <h1>Login</h1>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <text-input
-      [control]="fc.email"
-      [showErrorsWhen]="isSubmitted"
-      type="email"
-      label="Email">
-    </text-input>
-    <text-input
-      [control]="fc.password"
-      [showErrorsWhen]="isSubmitted"
-      type="password"
-      label="Password">
-    </text-input>
-    <default-button text="Login"></default-button>
-  </form>
-  <span>Don't have an account? Click <a class="underline" routerLink='/auth/register' [queryParams]="{returnUrl}">here</a> to register.</span>
+<div class="mt-20 w-4/5 mx-auto">
+  <img src="../../../../../assets/logos/logo-lg.png" alt="CoCreateHub Logo">
+  <h1 class="text-center text-3xl my-4 font-semibold">Login</h1>
+  <div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <text-input
+        [control]="fc.email"
+        [showErrorsWhen]="isSubmitted"
+        type="email"
+        label="Email">
+      </text-input>
+      <text-input
+        [control]="fc.password"
+        [showErrorsWhen]="isSubmitted"
+        type="password"
+        label="Password">
+      </text-input>
+      <default-button text="Login"></default-button>
+    </form>
+  </div>
+  <div class="my-4">
+    <span>Don't have an account? Click <a class="underline text-red" routerLink='/auth/register' [queryParams]="{returnUrl}">here</a> to register.</span>
+  </div>
 </div>

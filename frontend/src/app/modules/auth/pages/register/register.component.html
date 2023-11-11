@@ -1,31 +1,36 @@
-<div>
-  <h1>Register</h1>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <text-input
-      [control]="fc.name"
-      [showErrorsWhen]="isSubmitted"
-      type="text"
-      label="Name">
-    </text-input>
-    <text-input
-      [control]="fc.email"
-      [showErrorsWhen]="isSubmitted"
-      type="email"
-      label="Email">
-    </text-input>
-    <text-input
-      [control]="fc.password"
-      [showErrorsWhen]="isSubmitted"
-      type="password"
-      label="Password">
-    </text-input>
-    <text-input
-      [control]="fc.confirmPassword"
-      [showErrorsWhen]="isSubmitted"
-      type="password"
-      label="Confirm Password">
-    </text-input>
-    <default-button text="Register"></default-button>
-  </form>
-  <span>Already have an account? Click <a class="underline" routerLink='/auth/login' [queryParams]="{returnUrl}">here</a> to login.</span>
+<div class="mt-4 w-4/5 mx-auto">
+  <img src="../../../../../assets/logos/logo-lg.png" alt="CoCreateHub Logo">
+  <h1 class="text-center text-3xl my-4 font-semibold">Register</h1>
+  <div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <text-input
+        [control]="fc.name"
+        [showErrorsWhen]="isSubmitted"
+        type="text"
+        label="Name">
+      </text-input>
+      <text-input
+        [control]="fc.email"
+        [showErrorsWhen]="isSubmitted"
+        type="email"
+        label="Email">
+      </text-input>
+      <text-input
+        [control]="fc.password"
+        [showErrorsWhen]="isSubmitted"
+        type="password"
+        label="Password">
+      </text-input>
+      <text-input
+        [control]="fc.confirmPassword"
+        [showErrorsWhen]="isSubmitted"
+        type="password"
+        label="Confirm Password">
+      </text-input>
+      <default-button text="Register"></default-button>
+    </form>
+  </div>
+  <div class="my-4">
+    <span>Already have an account? Click <a class="underline text-red" routerLink='/auth/login' [queryParams]="{returnUrl}">here</a> to login.</span>
+  </div>
 </div>
