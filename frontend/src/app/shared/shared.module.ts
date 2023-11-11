@@ -8,6 +8,8 @@ import { DefaultButtonComponent } from './component/default-button/default-butto
 import { LoadingComponent } from './component/loading/loading.component';
 import { NavComponent } from './component/nav/nav.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { LinkComponent } from './component/link/link.component';
+import { CardComponent } from './component/card/card.component';
 
 
 
@@ -18,7 +20,9 @@ import { AppRoutingModule } from '../app-routing.module';
     TextInputComponent,
     DefaultButtonComponent,
     LoadingComponent,
-    NavComponent
+    NavComponent,
+    LinkComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +36,9 @@ import { AppRoutingModule } from '../app-routing.module';
     TextInputComponent,
     DefaultButtonComponent,
     LoadingComponent,
-    NavComponent
+    NavComponent,
+    LinkComponent,
+    CardComponent
   ]
 })
 export class SharedModule { }

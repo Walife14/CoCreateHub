@@ -27,9 +27,10 @@ router.get('/seed', asyncHandler(
 router.post('/login', asyncHandler(
     async (req, res) => {
         const { email, password } = req.body
-        const user = await UserModel.findOne({ email }).select('password')
+        const user = await UserModel.findOne({ email }).select("+password")
     
         if (user && (await bcrypt.compare(password, user.password))) {
+            console.log(user)
             res.send(generateTokenResponse(user))
         } else {
             res.status(HTTP_BAD_REQUEST).send("User name or password is not valid")
@@ -152,7 +153,7 @@ router.get('/active-buddies', asyncHandler(
 // JWT TOKEN
 const generateTokenResponse = (user: User) => {
     const token = jwt.sign({
-        email: user.email, isAdmin: user.isAdmin
+        email: user.email, isAdmin: user.isAdmin, name: user.name
     }, process.env.JWT_SECRET!, {
         expiresIn: "3d"
     })
@@ -168,7 +169,8 @@ const generateTokenResponse = (user: User) => {
         linkedinUrl: user?.linkedinUrl || undefined,
         projectGoals: user?.projectGoals || undefined,
         websiteUrl: user?.websiteUrl || undefined,
-        techs: user?.techs
+        techs: user?.techs,
+        projects: user.projects
     }
 }
 

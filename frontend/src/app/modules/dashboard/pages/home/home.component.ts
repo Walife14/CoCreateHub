@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private userService: UserService) {
     userService.userObservable.subscribe((user: User) => {
       this.user = user
+      console.log(user)
     })
   }
 

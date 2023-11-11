@@ -9,6 +9,7 @@ export class DefaultButtonComponent {
 
   @Input() type: 'submit' | 'button' = 'submit';
   @Input() text: string = 'Submit';
+  @Input() inverted: boolean = false;
   @Output() onClick = new EventEmitter()
 
 }

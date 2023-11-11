@@ -1,9 +1,29 @@
 <div *ngIf="user">
-  <h1 class="text-center text-3xl mt-20">Welcome {{ user.name }}!</h1>
-
-  <div class="grid gap-2 my-5 text-center">
-    <a routerLink="projects">Discover Projects</a>
-    <a routerLink="find-buddy">Find a CoCreate Buddy</a>
+  <div class="flex justify-around">
+    <app-link [text]="'Find A CoBuddy'" [link]="'find-buddy'"></app-link>
+    <app-link [text]="'Discover Projects'" [link]="'projects'"></app-link>
   </div>
+
+  <h1 class="text-center font-semibold text-3xl my-4">Welcome {{ user.name }}!</h1>
+
+  <div class="flex flex-col gap-y-4">
+    <div>
+      <h2 class="text-xl font-semibold mb-2">News</h2>
+      <p class="text-light-gray">This week I plan to release CoCreateHub to the public, to allow new developers to start using the webapp and discover and collaborate on projects!</p>
+    </div>
+    <div>
+      <h3 class="text-xl font-semibold mb-2">Projects</h3>
+      <ul class="grid grid-cols-2 gap-2">
+        <li *ngFor="let project of user.projects">
+          <app-card [title]="project.title" [text]="project.description" [link]="'projects/project/' + project.id"></app-card>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-xl font-semibold mb-2">Hot Projects</h4>
+      <span class="text-light-gray">Will be added soon</span>
+    </div>
+  </div>
+
 
 </div>

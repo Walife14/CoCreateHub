@@ -1,6 +1,7 @@
 <div class="flex justify-center w-full">
     <button
-        class="border-none outline-none font-medium py-2 px-4 min-w-[30%] mx-auto bg-red transition-all cursor-pointer text-white rounded-md active:bg-red/80"
+        class="outline-none font-medium py-2 px-4 min-w-[30%] mx-auto  transition-all cursor-pointer  rounded-md active:bg-red/80"
+        [ngClass]="inverted ? 'bg-white text-red border border-red' : 'text-white bg-red border-none'"
         [type]="type"
         (click)="onClick.emit()"
         >{{ text }}</button>
