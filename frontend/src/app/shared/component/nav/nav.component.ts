@@ -10,6 +10,8 @@ import { User } from '../../models/User';
 export class NavComponent {
   user!: User;
 
+  navOpen = false;
+
   constructor(private userService: UserService) {
     userService.userObservable.subscribe((newUser) => {
       this.user = newUser
