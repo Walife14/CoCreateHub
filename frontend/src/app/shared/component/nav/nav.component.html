@@ -16,7 +16,7 @@
                     <div [ngClass]="navOpen ? null : 'hidden'" ><img class="w-8 h-8" src="../../../../assets/x-mark.svg"></div>
                 </button>
                 <!-- content here -->
-                <ul class="absolute h-[90%] text-3xl flex flex-col gap-y-8" [ngClass]="navOpen ? null : 'hidden'">
+                <ul class="absolute h-[90%] text-xl flex flex-col gap-y-8" [ngClass]="navOpen ? null : 'hidden'">
                     <li>
                         <a routerLink="/dashboard" (click)="navOpen = false">
                             <div class="flex items-center justify-center gap-2">
