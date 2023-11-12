@@ -1,12 +1,9 @@
-<div class="text-center">
-  <h1 class="text-3xl mb-2">Projects</h1>
+<div class="text-center flex flex-col gap-y-4">
+  <h1 class="text-xl">Projects</h1>
   <a class="text-xl underline" routerLink="new">Create a new project</a>
+  <ul class="flex flex-col gap-y-2 w-4/5 mx-auto">
+    <li *ngFor="let project of projects">
+      <app-card [title]="project.title" [text]="project.description" [link]="'project/' + project.id" [lines]="true"></app-card>
+    </li>
+  </ul>
 </div>
-<ul>
-  <li class="border my-2 mx-2 p-2" *ngFor="let project of projects">
-    <a [routerLink]="'project/' + project.id">
-      <span class="text-2xl font-semibold">{{ project.title }}</span>
-      <p>{{ project.description }}</p>
-    </a>
-  </li>
-</ul>
