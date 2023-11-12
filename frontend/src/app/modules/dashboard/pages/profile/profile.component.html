@@ -1,12 +1,12 @@
-<div class="mx-2 mt-10">
+<div class="mx-2 gap-y-4 flex flex-col">
   <ng-container *ngIf="user">
     <div class="relative">
-      <h1 class="text-3xl font-semibold">{{ user.name }}</h1>
+      <h1 class="text-xl font-semibold">{{ user.name }}</h1>
       <a class="absolute right-0 top-0 text-sm underline" routerLink="/dashboard/profile/edit">Edit Profile</a>
-      <p>{{ user.bio }}</p>
+      <p class="text-light-gray">{{ user.bio ? user.bio : 'No bio' }}</p>
     </div>
 
-    <div class="flex items-center gap-2 my-10">
+    <div class="flex items-center gap-2">
       <img class="h-10" src="../../../../../assets/tools.svg">
       <ul *ngIf="user.techs && user.techs.length > 0; else noTech" class="flex gap-2 flex-wrap">
         <li *ngFor="let tech of user.techs">
@@ -38,25 +38,20 @@
       </ul>
     </div>
 
-    <div class="my-10">
-      <p>{{ user.projectGoals }}</p>
+    <div>
+      <h2 class="text-xl font-semibold">Projects I'd like to work on</h2>
+      <p>{{ user.projectGoals ? user.projectGoals : 'No project goals added yet' }}</p>
     </div>
 
     <div>
       <h2 class="text-xl font-semibold">Projects</h2>
-      <ul class="grid grid-cols-2 gap-10 my-4">
+      <ul class="grid grid-cols-2 gap-10 my-2">
         <li *ngFor="let project of user.projects">
-          <div class="border border-black">
-            <div class="text-center text-xl">{{ project.title }}</div>
-            <div class="h-32 w-full bg-gray-200"></div>
-            <div class="flex flex-row-reverse">
-              <a [routerLink]="'/dashboard/projects/project/' + project.id" class="p-2 rounded-full hover:bg-yellow-300/25"><img class="w-6 h-6" src="../../../../../assets/arrow-right.svg"></a>
-            </div>
-          </div>
+          <app-card [title]="project.title" [text]="project.description" [link]="'/dashboard/projects/project/' + project.id"></app-card>
         </li>
       </ul>
     </div>
 
-    <button class="border px-2 py-1 my-4" type="button">Invite to project</button>
+    <button class="border px-2 py-1" type="button">Invite to project</button>
   </ng-container>
 </div>
