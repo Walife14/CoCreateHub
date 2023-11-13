@@ -20,3 +20,5 @@ export const PROJECT_FETCH_ALL_URL = BASE_URL + '/api/projects'
 export const PROJECT_CREATE_URL = BASE_URL + '/api/projects/create'
 
 export const PROJECT_FETCH_BY_ID = BASE_URL + '/api/projects/project/'
+
+export const PROJECT_UPDATE_URL = BASE_URL + '/api/projects/project/update'

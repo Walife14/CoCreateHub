@@ -14,10 +14,12 @@ export interface Project {
     createdAt: Date;
     members: ProjectUser[];
     projectCreator: ProjectUser;
-    githubUrl: string;
-    liveUrl: string;
-    logoUrl: string;
-    backgroundUrl: string;
+    githubUrl?: string;
+    liveUrl?: string;
+    logoUrl?: string;
+    backgroundUrl?: string;
+    visibility?: boolean;
+    techs: string[];
 }
 
 export const ProjectSchema = new Schema<Project>({
@@ -34,7 +36,9 @@ export const ProjectSchema = new Schema<Project>({
     githubUrl: {type: String || null, required: false},
     liveUrl: {type: String || null, required: false},
     logoUrl: {type: String || null, required: false},
-    backgroundUrl: {type: String || null, required: false}
+    backgroundUrl: {type: String || null, required: false},
+    visibility: {type: Boolean, default: false},
+    techs: {type: [String], default: []}
 }, {
     timestamps: true,
     toJSON: {

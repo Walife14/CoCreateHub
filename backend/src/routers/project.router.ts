@@ -35,7 +35,8 @@ router.post('/create', asyncHandler(
                 githubUrl: githubUrl || '',
                 liveUrl: liveUrl || '',
                 logoUrl: logoUrl || '',
-                backgroundUrl: backgroundUrl || ''
+                backgroundUrl: backgroundUrl || '',
+                techs: []
             }
 
             const dbProject = await ProjectModel.create(newProject)
@@ -62,6 +63,33 @@ router.get('/project/:id', asyncHandler(
             // res.status(200).send({"message": "Successfully found project with id", project})
         } catch(error) {
             res.status(HTTP_NOT_FOUND).send({"message": "Could not find or fetch project"})
+        }
+    }
+))
+
+// PROJECTS || UPDATE PROJECT BY ID
+router.put('/project/update', asyncHandler(
+    async (req, res) => {
+        try {
+            const { currentUserId: userId, projectId, description, githubUrl, liveUrl, techs, visibility, title } = req.body
+
+            const projectUpdatedFields = {
+                userId, projectId, description, githubUrl, liveUrl, techs, visibility, title
+            }
+
+            const project = await ProjectModel.findById(projectId)
+
+            // res.status(200).send(project)
+            // get the project id -> check if userId === project.creatorId
+            if (userId === project?.projectCreator.id) {
+                const updatedProject =  await ProjectModel.findByIdAndUpdate(projectId, projectUpdatedFields)
+
+                res.status(200).send(updatedProject)
+            } else {
+                throw "Failed"
+            }
+        } catch(error) {
+            res.status(HTTP_BAD_REQUEST).send({"message": "Could not update the project by id"})
         }
     }
 ))

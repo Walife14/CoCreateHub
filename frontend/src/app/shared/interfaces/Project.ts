@@ -12,4 +12,6 @@ export interface Project {
     updatedAt: Date;
     __v: number;
     _id: string;
+    visibility: boolean;
+    techs: string[];
 }

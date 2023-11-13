@@ -7,6 +7,7 @@ import { CreateProjectComponent } from './pages/create-project/create-project.co
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
 import { FindCocreateBuddyComponent } from './pages/find-cocreate-buddy/find-cocreate-buddy.component';
+import { EditProjectComponent } from './pages/project/edit-project/edit-project.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'projects/project/:id',
     component: ProjectComponent
+  },
+  {
+    path: 'projects/project/:id/edit',
+    component: EditProjectComponent
   },
   {
     path: 'profile/edit',

@@ -1,6 +1,6 @@
 <div class="mx-2 relative">
   <ng-container *ngIf="project && user; else noProject">
-      <a *ngIf="isCreator" class="absolute right-0 top-0 text-sm underline">Edit Project</a>
+      <a *ngIf="isCreator" class="absolute right-0 top-0 text-sm underline" routerLink="edit">Edit Project</a>
     <div class="text-center">
       <h1 class="text-3xl font-semibold">{{ project.title }}</h1>
       <p>{{ project.description }}</p>
