@@ -11,6 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
 import { FindCocreateBuddyComponent } from './pages/find-cocreate-buddy/find-cocreate-buddy.component';
+import { EditProjectComponent } from './pages/project/edit-project/edit-project.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FindCocreateBuddyComponent } from './pages/find-cocreate-buddy/find-coc
     CreateProjectComponent,
     ProfileComponent,
     EditProfileComponent,
-    FindCocreateBuddyComponent
+    FindCocreateBuddyComponent,
+    EditProjectComponent
   ],
   imports: [
     CommonModule,
