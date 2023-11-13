@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/User';
 import { ProjectService } from 'src/app/services/project.service';
@@ -21,7 +21,8 @@ export class EditProjectComponent implements OnInit {
   form!: UntypedFormGroup;
 
   constructor(private fb: FormBuilder, private userService: UserService,
-    private activatedRoute: ActivatedRoute, private projectService: ProjectService) {
+    private activatedRoute: ActivatedRoute, private router: Router,
+    private projectService: ProjectService) {
     userService.getUserById(userService.currentUser.id).subscribe((user: User) => {
       this.user = user
     })
@@ -97,7 +98,13 @@ export class EditProjectComponent implements OnInit {
       techs: fv.techs
     }
 
-    this.projectService.updateProject(updatedProject).subscribe()
+    this.projectService.updateProject(updatedProject).subscribe({
+      next: (project) => {
+        setTimeout(() => {
+          this.router.navigate(['/dashboard/projects/project/' + project.id])
+        }, 1000)
+      }
+    })
   }
 
   ensureHttpOrHttps(input: string | undefined): string | undefined {
