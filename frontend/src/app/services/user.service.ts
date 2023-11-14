@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
 import { HttpClient, HttpParams } from '@angular/common/http'
-import { USER_BY_ID_URL, USER_LOGIN_URL, USER_REGISTER_URL, USER_UPDATE_URL, USER_VISIBLE_TRUE_URL } from '../shared/constants/urls';
+import { USER_BY_ID_URL, USER_LOGIN_URL, USER_PROJECT_INVITE, USER_REGISTER_URL, USER_UPDATE_URL, USER_VISIBLE_TRUE_URL } from '../shared/constants/urls';
 
 const USER_KEY = 'User'
 @Injectable({
@@ -88,7 +88,6 @@ export class UserService {
       })
     )
   }
-
   
   getUserById(id: string): Observable<any> {
     return this.http.get<User>(USER_BY_ID_URL + id)
@@ -102,6 +101,19 @@ export class UserService {
         },
         error: (error) => {
           console.error("Failed to get users with visibility set to true", error)
+        }
+      })
+    )
+  }
+
+  inviteToProject(data: any): Observable<any> {
+    return this.http.put<any>(USER_PROJECT_INVITE, data).pipe(
+      tap({
+        next: (success) => {
+          console.log(success)
+        },
+        error: (error) => {
+          console.error(error.error)
         }
       })
     )

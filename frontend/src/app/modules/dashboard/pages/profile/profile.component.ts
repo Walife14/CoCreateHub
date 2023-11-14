@@ -21,27 +21,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(private userService: UserService, private activatedRoute: ActivatedRoute) {
 
-    // have to fetch using id because the subscribe for userObservable fetches the token data
-    // which would be outdated if the user edits their profile
-    // userService.userObservable.subscribe((user) => {
-    //   userService.getUserById(user.id).subscribe((user: User) => {
-    //     this.user = user
-    //     console.log(this.user)
-    //   })
-    // })
-
     // // get user based on id in route
     this.id = activatedRoute.snapshot.paramMap.get('id')!
-    // userService.getUserById(this.id).subscribe((user: User) => {
-    //   this.user = user
-    //   console.log({"fetched user": this.user.id})
-    // })
-    
-    // // get user currently signed in
-    // this.userService.getUserById(this.userService.currentUser.id).subscribe((user: User) => {
-    //   this.currentUser = user
-    //   console.log({"Current user": this.currentUser.id})
-    // })
 
     forkJoin({
       fetchedUser: userService.getUserById(this.id),
@@ -57,6 +38,24 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onInviteUser(project: any) {
+
+    const invitation = {
+      inviteeId: this.user!.id,
+      user: {
+        id: this.currentUser.id,
+        name: this.currentUser.name
+      },
+      project: {
+        id: project.id,
+        title: project.title,
+        description: project.description
+      }
+    }
+
+    this.userService.inviteToProject(invitation).subscribe()
   }
 
 }
