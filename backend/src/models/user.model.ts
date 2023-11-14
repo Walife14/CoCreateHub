@@ -15,6 +15,7 @@ export interface User {
     techs?: string[];
     visibility: boolean;
     projects?: {id: string, title: string, description: string, isProjectAdmin: boolean}[];
+    invitations?: {user: {id: string, name: string}, project: {id: string, title: string, description: string}}[];
 }
 
 // export interface Project {
@@ -45,7 +46,10 @@ export const UserSchema = new Schema<User>({
     visibility: {type: Boolean, required: true, default: false},
     projects: {type: [{
         id: String, title: String, description: String, isProjectAdmin: Boolean
-    }]}
+    }]},
+    invitations: {type: [{
+        user: {id: String, name: String}, project: {id: String, title: String, description: String}
+    }], default: []}
 }, {
     timestamps: true,
     toJSON: {

@@ -150,6 +150,29 @@ router.get('/active-buddies', asyncHandler(
     }
 ))
 
+// USER || INVITE USER TO PROJECT
+router.put('/invite', asyncHandler(
+    async(req, res) => {
+
+        const { inviteeId, user, project } = req.body
+
+        try {
+            
+            const invitationObj = {
+                user: user,
+                project: project
+            }
+
+            const invitation = await UserModel.findByIdAndUpdate(inviteeId, { $push: { invitations: invitationObj } })
+
+            res.status(200).send({'message': `Successfully invited user to ${project.title}`})
+
+        } catch (error) {
+            res.status(400).send({'message': 'Failed to send invitation!'})
+        }
+    }
+))
+
 // JWT TOKEN
 const generateTokenResponse = (user: User) => {
     const token = jwt.sign({
