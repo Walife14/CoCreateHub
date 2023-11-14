@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { PROJECT_CREATE_URL, PROJECT_FETCH_ALL_URL, PROJECT_FETCH_BY_ID, PROJECT_UPDATE_URL } from '../shared/constants/urls';
+import { PROJECT_CREATE_URL, PROJECT_DELETE_URL, PROJECT_FETCH_ALL_URL, PROJECT_FETCH_BY_ID, PROJECT_UPDATE_URL } from '../shared/constants/urls';
 import { Project } from '../shared/interfaces/Project';
 import { IProjectCreate } from '../shared/interfaces/IProjectCreate';
 import { UserService } from './user.service';
@@ -68,6 +68,25 @@ export class ProjectService {
         },
         error: (errorResponse) => {
           "failed to update project"
+        }
+      })
+    )
+  }
+
+  deleteProject(id: string) {
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
+      body: { id: id}
+    }
+
+    return this.http.delete(PROJECT_DELETE_URL, httpOptions).pipe(
+      tap({
+        next: (success) => {
+          console.log(success)
+        },
+        error: (error) => {
+          console.error(error.error)
         }
       })
     )

@@ -23,3 +23,5 @@ export const PROJECT_CREATE_URL = BASE_URL + '/api/projects/create'
 export const PROJECT_FETCH_BY_ID = BASE_URL + '/api/projects/project/'
 
 export const PROJECT_UPDATE_URL = BASE_URL + '/api/projects/project/update'
+
+export const PROJECT_DELETE_URL = BASE_URL + '/api/projects/project/delete'

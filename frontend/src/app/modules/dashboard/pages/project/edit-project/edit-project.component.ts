@@ -120,4 +120,11 @@ export class EditProjectComponent implements OnInit {
 
   }
 
+  deleteProject() {
+    this.projectService.deleteProject(this.currentProjectId).subscribe()
+    setTimeout(() => {
+      this.router.navigate(['/dashboard/projects'])
+    }, 1000)
+  }
+
 }
