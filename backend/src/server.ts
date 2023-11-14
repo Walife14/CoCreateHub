@@ -14,7 +14,7 @@ app.use(express.json())
 
 app.use(cors({
     credentials:true,
-    origin:['http://localhost:4200']
+    origin:['http://192.168.1.141:4200']
 }))
 
 app.use('/api/users', userRouter)

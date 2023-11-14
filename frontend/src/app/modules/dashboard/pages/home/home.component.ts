@@ -12,10 +12,18 @@ export class HomeComponent implements OnInit {
   user!: User;
 
   constructor(private userService: UserService) {
-    userService.userObservable.subscribe((user: User) => {
-      this.user = user
-      console.log(user)
+
+    console.log(userService.currentUser.id)
+
+    userService.getUserById(userService.currentUser.id).subscribe({
+      next: (user: User) => {
+        this.user = user
+      },
+      error: (error) => {
+        console.error(error.response)
+      }
     })
+    
   }
 
   ngOnInit() {
