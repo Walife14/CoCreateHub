@@ -14,7 +14,7 @@ export interface User {
     websiteUrl?: string;
     techs?: string[];
     visibility: boolean;
-    projects?: Project[];
+    projects?: {id: string, title: string, description: string, isProjectAdmin: boolean}[];
 }
 
 // export interface Project {
@@ -44,7 +44,7 @@ export const UserSchema = new Schema<User>({
     websiteUrl: {type: String, required: false},
     visibility: {type: Boolean, required: true, default: false},
     projects: {type: [{
-        id: String, title: String, description: String, liveUrl: String, logoUrl: String, backgroundUrl: String
+        id: String, title: String, description: String, isProjectAdmin: Boolean
     }]}
 }, {
     timestamps: true,

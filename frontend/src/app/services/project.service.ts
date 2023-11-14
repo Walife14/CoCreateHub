@@ -34,7 +34,8 @@ export class ProjectService {
           const newProject = {
             id: project.id,
             title: project.title,
-            description: project.description
+            description: project.description,
+            isProjectAdmin: true
           }
 
           this.userService.update({id: project.projectCreator.id, newProject: newProject}).subscribe()

@@ -1,8 +1,10 @@
-<div class="mx-2 gap-y-4 flex flex-col">
+<div class="mx-2 gap-y-4 flex flex-col relative">
   <ng-container *ngIf="user">
-    <div class="relative">
+
+    <a class="absolute right-0 top-0 text-sm underline" routerLink="/dashboard/profile/edit" *ngIf="isProfileUser">Edit Profile</a>
+
+    <div>
       <h1 class="text-xl font-semibold">{{ user.name }}</h1>
-      <a class="absolute right-0 top-0 text-sm underline" routerLink="/dashboard/profile/edit">Edit Profile</a>
       <p class="text-light-gray">{{ user.bio ? user.bio : 'No bio' }}</p>
     </div>
 
@@ -44,7 +46,7 @@
     </div>
 
     <div>
-      <h2 class="text-xl font-semibold">Projects</h2>
+      <h3 class="text-xl font-semibold">Projects</h3>
       <ul class="grid grid-cols-2 gap-10 my-2">
         <li *ngFor="let project of user.projects">
           <app-card [title]="project.title" [text]="project.description" [link]="'/dashboard/projects/project/' + project.id"></app-card>
@@ -52,6 +54,14 @@
       </ul>
     </div>
 
-    <button class="border px-2 py-1" type="button">Invite to project</button>
+    <div *ngIf="!isProfileUser" class="text-center space-y-2">
+      <h4>Invite to project</h4>
+      <ul class="flex flex-col gap-y-1">
+        <li *ngFor="let project of currentUser.projects">
+          <button class="border px-2 py-1" type="button">Invite to: {{ project.title }}</button>
+        </li>
+      </ul>
+    </div>
+
   </ng-container>
 </div>

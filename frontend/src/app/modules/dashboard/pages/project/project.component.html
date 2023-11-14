@@ -36,7 +36,7 @@
           <span [ngClass]="showProjectMembers ? 'text-red' : null">Members</span>
         </div>
       </button>
-      <div class="max-h-[50dvh] w-full mx-2 rounded-md p-2 overflow-y-scroll shadow shadow-light-gray" *ngIf="showProjectMembers">
+      <div class="max-h-[50dvh] w-full rounded-md p-2 overflow-y-scroll shadow shadow-light-gray" *ngIf="showProjectMembers">
         <ul>
           <li *ngFor="let member of project.members">
             <div class="flex justify-between items-center text-xl">

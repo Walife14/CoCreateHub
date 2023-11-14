@@ -17,8 +17,9 @@ export class CreateProjectComponent implements OnInit {
   isSubmitted = false;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-              private projectService: ProjectService
-    ) { }
+    private projectService: ProjectService) {
+      
+    }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
