@@ -12,14 +12,14 @@ import { forkJoin } from 'rxjs';
 })
 export class ProjectComponent implements OnInit {
 
-  project!: Project;
 
   currentProjectId?: string;
+  project!: Project;
 
-  isCreator = false;
+  showProjectMembers = false;
 
   user!: User;
-
+  isCreator = false;
   currentUserId: any;
 
   constructor(private projectService: ProjectService, private activatedRoute: ActivatedRoute,
