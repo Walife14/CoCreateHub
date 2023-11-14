@@ -2,6 +2,7 @@ import { Router } from 'express'
 import asyncHandler from 'express-async-handler'
 import { HTTP_BAD_REQUEST, HTTP_NOT_FOUND } from '../constant/http_status'
 import { Project, ProjectModel } from '../models/project.model'
+import { UserModel } from '../models/user.model'
 
 const router = Router()
 
@@ -90,6 +91,31 @@ router.put('/project/update', asyncHandler(
             }
         } catch(error) {
             res.status(HTTP_BAD_REQUEST).send({"message": "Could not update the project by id"})
+        }
+    }
+))
+
+// PROJECTS || DELETE PROJECT BY ID
+// NEED TO DELETE PROJECT DOCUMENT FROM PROJECT COLLECTION AND REMOVE PROJECT FROM
+// USER DOCUMENT EMBEDDED PROJECTS FIELD
+router.delete('/project/delete', asyncHandler(
+    async (req, res) => {
+        const { id } = req.body
+        try {
+
+            // delete project document from projects collection
+            const deletedProject = await ProjectModel.findByIdAndDelete(id)
+
+            // delete project from users document (embedded)
+            // (Searches all users documents to see if there are any project with the id)
+            const deletedUserProject = await UserModel.updateMany(
+                { },
+                { $pull: { projects: { id }}}
+            )
+
+            res.status(200).send({"message": "successfully deleted", "project": deletedProject, "userProject": deletedUserProject})
+        } catch(error) {
+            res.status(400).send({'message': `Failed to delete project with id ${id ? id : "'NO ID FOUND'"}`})
         }
     }
 ))
