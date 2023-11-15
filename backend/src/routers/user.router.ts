@@ -191,6 +191,11 @@ router.post('/invite/response', asyncHandler(
 
             const userAfterDeletedInvitation = await UserModel.findByIdAndUpdate(user.id, { $pull: { invitations: { _id: invitationId } }})
 
+            // check if the user is already part of the project if so just remove the invitation
+            const alreadyPartOfProject = await UserModel.findOne({_id: user.id, 'projects.id': project.id})
+
+            if (alreadyPartOfProject != null) throw 'already part of the project!'
+
             // if response is true > accepted invitation
             if (response === true) {
                 
