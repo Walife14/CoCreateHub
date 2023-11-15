@@ -9,13 +9,26 @@
     </div>
 
     <div>
-      <p>You currently have <span class="text-red">{{ user.invitations!.length }}</span> project invitations! <button type="button" class="text-red" (click)="showInvitations = true">Click here</button> to open them!</p>
+      <p>
+        You currently have <span class="text-red">{{ user.invitations!.length }}</span> project invitations!
+        <span *ngIf="user.invitations!.length > 0">
+          <button type="button" class="text-red" (click)="showInvitations = !showInvitations">Click here</button> 
+          to toggle invitations display!
+        </span>
+      </p>
     </div>
 
     <div *ngIf="showInvitations">
-      <ul>
+      <ul class="flex flex-col gap-y-2">
         <li *ngFor="let invitation of user.invitations">
-          <a [routerLink]="'projects/project/' + invitation.project.id">Invited to {{ invitation.project.title }} by {{ invitation.user.name }}</a>
+          <div class="border-l-2 border-dark-gray pl-2">
+            <span>Invited to {{ invitation.project.title }} by {{ invitation.user.name }}</span>
+            <span class="text-sm underline text-red flex gap-x-2">
+              <a [routerLink]="'projects/project/' + invitation.project.id">View Project</a>
+              <button class="underline" type="button" (click)="handleInvitationRequest(true, invitation.id, invitation.project)">Accept</button>
+              <button class="underline" type="button" (click)="handleInvitationRequest(false, invitation.id, invitation.project)">Decline</button>
+            </span>
+          </div>
         </li>
       </ul>
     </div>

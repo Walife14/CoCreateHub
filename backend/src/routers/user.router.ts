@@ -5,6 +5,7 @@ import asyncHandler from 'express-async-handler'
 import { User, UserModel } from '../models/user.model'
 import { HTTP_BAD_REQUEST } from '../constant/http_status'
 import bcrypt from 'bcryptjs'
+import { ProjectModel } from '../models/project.model'
 
 const router = Router()
 
@@ -159,6 +160,7 @@ router.put('/invite', asyncHandler(
 
         try {
             
+            // note user here is user sending the invitation - NOT the receiver
             const invitationObj = {
                 user: user,
                 project: project
@@ -170,6 +172,46 @@ router.put('/invite', asyncHandler(
 
         } catch (error) {
             res.status(400).send({'message': 'Failed to send invitation!'})
+        }
+    }
+))
+
+// USER || HANDLE ACCEPT/DECLINE PROJECT INVITE
+router.post('/invite/response', asyncHandler(
+    async(req, res) => {
+
+        const { response, user, invitationId, project } = req.body
+
+        try {
+
+            const exists = await UserModel.findOne({_id: user.id, 'invitations._id': invitationId})
+
+            // checking if the invitation really exists in the users invitations list
+            if (exists === null) throw 'Could not find invitation in the users invitation list'
+
+            const userAfterDeletedInvitation = await UserModel.findByIdAndUpdate(user.id, { $pull: { invitations: { _id: invitationId } }})
+
+            // if response is true > accepted invitation
+            if (response === true) {
+                
+                project.isProjectAdmin = false
+                user.isProjectAdmin = false
+
+                // add project to user projects
+                const addProjectToUser = await UserModel.findByIdAndUpdate(user.id, { $push: { projects: project }})
+
+                // add the user to the projects members
+                const addUserToProject = await ProjectModel.findByIdAndUpdate(project.id, { $push: { members: user }})
+
+                res.status(200).send({'message': 'Accepted invitation!'})
+            } else {
+            // if response is false > declined invitation
+
+                res.status(200).send({'message': `declined invitation to ${invitationId}`})
+
+            }
+        } catch(error) {
+            res.status(400).send({'message': 'Failed to accept or decline invitation!', 'error': error})
         }
     }
 ))

@@ -32,4 +32,27 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  handleInvitationRequest(accepted: boolean, invitationId: string, project: any) {
+
+    const invitationObj = {
+      response: accepted,
+      invitationId,
+      user: {
+        id: this.user.id,
+        name: this.user.name,
+        email: this.user.email,
+      },
+      project: accepted ? {
+        id: project.id,
+        title: project.title, 
+        description: project.description
+      } : null
+    }
+
+    // remove the invitation from the currently signed in user
+    this.user.invitations?.splice(this.user.invitations.findIndex(el => el.id === invitationId), 1)
+
+    this.userService.handleProjectInvitation(invitationObj).subscribe()
+  }
+
 }
