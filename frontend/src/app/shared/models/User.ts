@@ -14,4 +14,5 @@ export class User {
     linkedinUrl?: string;
     githubUrl?: string;
     projects!: Project[];
+    invitations?: any[];
 }

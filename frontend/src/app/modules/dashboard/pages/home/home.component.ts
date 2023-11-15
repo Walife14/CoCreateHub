@@ -11,13 +11,16 @@ export class HomeComponent implements OnInit {
   
   user!: User;
 
+  showInvitations = false;
+
   constructor(private userService: UserService) {
 
-    console.log(userService.currentUser.id)
+    // console.log(userService.currentUser.id)
 
     userService.getUserById(userService.currentUser.id).subscribe({
       next: (user: User) => {
         this.user = user
+        console.log(user)
       },
       error: (error) => {
         console.error(error.response)

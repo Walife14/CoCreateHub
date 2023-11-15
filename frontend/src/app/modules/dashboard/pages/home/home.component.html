@@ -7,11 +7,24 @@
       <app-link [text]="'Find A CoBuddy'" [link]="'find-buddy'"></app-link>
       <app-link [text]="'Discover Projects'" [link]="'projects'"></app-link>
     </div>
+
+    <div>
+      <p>You currently have <span class="text-red">{{ user.invitations!.length }}</span> project invitations! <button type="button" class="text-red" (click)="showInvitations = true">Click here</button> to open them!</p>
+    </div>
+
+    <div *ngIf="showInvitations">
+      <ul>
+        <li *ngFor="let invitation of user.invitations">
+          <a [routerLink]="'projects/project/' + invitation.project.id">Invited to {{ invitation.project.title }} by {{ invitation.user.name }}</a>
+        </li>
+      </ul>
+    </div>
   
     <div>
       <h2 class="text-xl font-semibold mb-2">News</h2>
       <p class="text-light-gray">This week I plan to release CoCreateHub to the public, to allow new developers to start using the webapp and discover and collaborate on projects!</p>
     </div>
+
     <div>
       <h3 class="text-xl font-semibold mb-2">Projects</h3>
       <ul class="grid grid-cols-2 gap-2">
@@ -20,6 +33,7 @@
         </li>
       </ul>
     </div>
+
     <div>
       <h4 class="text-xl font-semibold mb-2">Hot Projects</h4>
       <span class="text-light-gray">Will be added soon</span>
