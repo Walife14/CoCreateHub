@@ -13,6 +13,6 @@ export class User {
     projectGoals?: string;
     linkedinUrl?: string;
     githubUrl?: string;
-    projects!: Project[];
+    projects!: any[];
     invitations?: any[];
 }

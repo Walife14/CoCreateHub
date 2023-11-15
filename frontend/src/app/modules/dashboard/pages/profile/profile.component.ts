@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
   user?: User;
 
   currentUser!: User;
+  filteredIsAdminProjects: any;
 
   // is the current user the viewer of the user profile
   isProfileUser = false;
@@ -30,6 +31,9 @@ export class ProfileComponent implements OnInit {
     }).subscribe((results) => {
       this.user = results.fetchedUser
       this.currentUser = results.currentUser
+
+      this.filteredIsAdminProjects = this.currentUser.projects.filter(project => project.isProjectAdmin)
+
       if (this.user && this.currentUser) {
         this.user.id === this.currentUser.id ? this.isProfileUser = true : this.isProfileUser = false
       }

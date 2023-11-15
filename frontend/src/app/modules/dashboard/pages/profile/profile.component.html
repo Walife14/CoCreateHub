@@ -57,8 +57,8 @@
     <div *ngIf="!isProfileUser" class="text-center space-y-2">
       <h4>Invite to project</h4>
       <ul class="flex flex-col gap-y-1">
-        <li *ngFor="let project of currentUser.projects">
-          <button class="border px-2 py-1" type="button" (click)="onInviteUser(project)">Invite to: {{ project.title }}</button>
+        <li *ngFor="let project of filteredIsAdminProjects">
+            <button class="border px-2 py-1" type="button" (click)="onInviteUser(project)">Invite to: {{ project.title }}</button>
         </li>
       </ul>
     </div>
