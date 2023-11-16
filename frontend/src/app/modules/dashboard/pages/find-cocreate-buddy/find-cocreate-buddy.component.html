@@ -1,6 +1,6 @@
 <div class="mx-2">
   <div class="my-2">
-    <a routerLink="/dashboard/profile/edit">Would you like your profile to be discoverable here? CLick here to update your profile visibility!</a>
+    <a routerLink="/dashboard/profile/edit">Would you like your profile to be discoverable here? Click here to update your profile visibility!</a>
   </div>
 
   <h1 class="my-5">What skills are you looking for?</h1>
@@ -9,22 +9,13 @@
   <!-- User card to be implemented as a separate component in future -->
   <ul class="my-5" *ngFor="let user of users">
     <li>
-      <a>
-        <div class="border border-black p-2">
-          <div class="text-xl font-semibold">{{ user.name }}</div>
-          <ul class="flex gap-2 text-sm">
-            <li class="px-2 py-1 bg-green-200 rounded-md" *ngFor="let tech of user.techs">
-              {{ tech }}
-            </li>
-          </ul>
-          <p>
-            {{ user.projectGoals }}
-          </p>
-          <div class="flex flex-row-reverse">
-            <button class="border border-black rounded-full w-6 h-6" type="button">></button>
-          </div>
-        </div>
-      </a>
+      <app-card
+        [title]="user.name"
+        [text]="user.projectGoals!"
+        [link]="'project/' + user.id"
+        [lines]="true"
+        [techs]="user.techs"
+      ></app-card>
     </li>
   </ul>
 

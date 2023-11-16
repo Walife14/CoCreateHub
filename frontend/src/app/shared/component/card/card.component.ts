@@ -11,6 +11,7 @@ export class CardComponent implements OnInit {
   @Input() text!: string;
   @Input() link!: string;
   @Input() lines?: boolean = false;
+  @Input() techs?: string[];
 
   constructor() { }
 
