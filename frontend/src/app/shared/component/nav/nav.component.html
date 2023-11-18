@@ -1,22 +1,22 @@
 <header>
-    <nav class="flex justify-end m-2">
+    <nav class="flex justify-end m-2 lg:m-0 lg:flex-col">
         <div
-        [ngClass]="navOpen ? 'fixed top-0 left-0 w-full h-[100dvh] flex items-center justify-center z-50' : 'flex'"
+        [ngClass]="navOpen ? 'fixed top-0 left-0 w-full h-[100dvh] flex items-center justify-center z-50' : 'flex lg:relative lg:h-[100dvh] lg:bg-gray-100'"
         >
-            <div 
-                class="bg-white shadow-[0px_0px_10px] shadow-dark-gray/20 relative"
-                [ngClass]="navOpen ? 'w-[94%] h-[95%] rounded-3xl flex items-center justify-center' : 'rounded-3xl'"
+            <div
+                class="bg-white shadow-[0px_0px_10px] shadow-dark-gray/20 relative lg:w-full lg:h-full"
+                [ngClass]="navOpen ? 'w-[94%] h-[95%] rounded-3xl flex items-center justify-center' : 'rounded-3xl lg:shadow-none lg:bg-transparent'"
             >
                 <button
                     class="grid p-2 rounded-full"
-                    [ngClass]="navOpen ? 'grid-cols-1 m-1 absolute right-0 top-0' : 'gap-1 grid-cols-3'"
+                    [ngClass]="navOpen ? 'grid-cols-1 m-1 absolute right-0 top-0' : 'gap-1 grid-cols-3 lg:hidden'"
                     (click)="navOpen = !navOpen"
                 >
                     <div [ngClass]="navOpen ? 'hidden' : null" class="w-1.5 h-1.5 bg-dark-gray rounded-full" *ngFor="let i of [1,2,3,4,5,6,7,8,9]"></div>
                     <div [ngClass]="navOpen ? null : 'hidden'" ><img class="w-8 h-8" src="../../../../assets/x-mark.svg"></div>
                 </button>
                 <!-- content here -->
-                <ul class="absolute h-[90%] text-xl flex flex-col gap-y-8" [ngClass]="navOpen ? null : 'hidden'">
+                <ul class="absolute h-[90%] text-xl flex flex-col gap-y-8 lg:h-full lg:w-full lg:relative lg:py-10" [ngClass]="navOpen ? null : 'hidden lg:flex'">
                     <li>
                         <a routerLink="/dashboard" (click)="navOpen = false">
                             <div class="flex items-center justify-center gap-2">

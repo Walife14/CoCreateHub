@@ -1,4 +1,8 @@
-<app-nav></app-nav>
-<div class="px-2 pt-2">
-    <router-outlet></router-outlet>
+<div class="lg:grid lg:grid-cols-5">
+    <div class="lg:col-span-1">
+        <app-nav></app-nav>
+    </div>
+    <div class="px-2 pt-2 lg:col-span-4">
+        <router-outlet></router-outlet>
+    </div>
 </div>
