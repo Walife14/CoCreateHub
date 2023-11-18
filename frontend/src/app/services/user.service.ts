@@ -12,9 +12,18 @@ export class UserService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  get httpOptions() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-auth-token': this.authService.currentUser.token || ''
+      })
+    }
+    return httpOptions
+  }
+
   // make an interface for updatedData and put it into the edit-profile component aswell
   update(updatedData: any): Observable<any> {
-    return this.http.put<any>(USER_UPDATE_URL, updatedData).pipe(
+    return this.http.put<any>(USER_UPDATE_URL, updatedData, this.httpOptions).pipe(
       tap({
         next: (update) => {
           console.log("successfully updated user", update)
@@ -27,12 +36,7 @@ export class UserService {
   }
   
   getUserById(id: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'x-auth-token': this.authService.currentUser.token || ''
-      })
-    }
-    return this.http.get<User>(USER_BY_ID_URL + id, httpOptions)
+    return this.http.get<User>(USER_BY_ID_URL + id, this.httpOptions)
   }
 
   getVisibleUsers(): Observable<User[]> {
@@ -49,7 +53,7 @@ export class UserService {
   }
 
   inviteToProject(data: any): Observable<any> {
-    return this.http.put<any>(USER_PROJECT_INVITE, data).pipe(
+    return this.http.put<any>(USER_PROJECT_INVITE, data, this.httpOptions).pipe(
       tap({
         next: (success) => {
           console.log(success)
@@ -62,7 +66,7 @@ export class UserService {
   }
 
   handleProjectInvitation(invitationObj: any): Observable<any> {
-    return this.http.post<any>(USER_HANDLE_INVITE, invitationObj).pipe(
+    return this.http.post<any>(USER_HANDLE_INVITE, invitationObj, this.httpOptions).pipe(
       tap({
         next: (success) => {
           console.log(success)
