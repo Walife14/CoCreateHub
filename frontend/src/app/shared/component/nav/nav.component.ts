@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
 import { User } from '../../models/User';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -12,14 +12,14 @@ export class NavComponent {
 
   navOpen = false;
 
-  constructor(private userService: UserService) {
-    userService.userObservable.subscribe((newUser) => {
+  constructor(private authService: AuthService) {
+    authService.userObservable.subscribe((newUser) => {
       this.user = newUser
     })
   }
 
   logout() {
-    this.userService.logout()
+    this.authService.logout()
   }
 
 }

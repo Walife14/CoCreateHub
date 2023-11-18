@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/User';
@@ -17,7 +18,7 @@ export class CreateProjectComponent implements OnInit {
   isSubmitted = false;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-    private projectService: ProjectService) {
+    private projectService: ProjectService, private authService: AuthService) {
       
     }
 
@@ -30,7 +31,7 @@ export class CreateProjectComponent implements OnInit {
     // could potentially reduce api calls by only fetching user once they click create project
     // and the form is correct - since this currently would always fetch current user from the db
     // if someone comes into this page and leaves it would have made an uneccessary fetch
-    this.userService.userObservable.subscribe((user: User) => {
+    this.authService.userObservable.subscribe((user: User) => {
       this.user = user
     })
   }

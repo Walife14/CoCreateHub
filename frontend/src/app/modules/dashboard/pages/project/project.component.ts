@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Project } from 'src/app/shared/interfaces/Project';
 import { User } from 'src/app/shared/models/User';
 import { forkJoin } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -23,10 +24,10 @@ export class ProjectComponent implements OnInit {
   currentUserId: any;
 
   constructor(private projectService: ProjectService, private activatedRoute: ActivatedRoute,
-    private userService: UserService) {
+    private authService: AuthService, private userService: UserService) {
 
     this.currentProjectId = activatedRoute.snapshot.paramMap.get('id')!
-    this.currentUserId = userService.currentUser.id
+    this.currentUserId = authService.currentUser.id
 
     forkJoin({
       user: userService.getUserById(this.currentUserId),

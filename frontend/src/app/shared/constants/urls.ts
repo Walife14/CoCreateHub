@@ -1,12 +1,13 @@
 // const BASE_URL = 'http://localhost:5000'
 const BASE_URL = 'http://192.168.1.141:5000'
 
+// AUTH
+
+export const AUTH_LOGIN_URL = BASE_URL + '/api/auth/login'
+
+export const AUTH_REGISTER_URL = BASE_URL + '/api/auth/register'
 
 // USER
-
-export const USER_LOGIN_URL = BASE_URL + '/api/users/login'
-
-export const USER_REGISTER_URL = BASE_URL + '/api/users/register'
 
 export const USER_UPDATE_URL = BASE_URL + '/api/users/update'
 

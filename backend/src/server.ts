@@ -3,10 +3,13 @@ dotenv.config()
 
 import express from "express"
 import cors from "cors"
+import authRouter from './routers/auth.router'
 import userRouter from "./routers/user.router"
 import projectRouter from './routers/project.router'
 import { dbConnect } from './configs/database.config'
 dbConnect()
+
+const checkAuth = require('./middlewares/checkAuth')
 
 const app = express()
 
@@ -14,11 +17,15 @@ app.use(express.json())
 
 app.use(cors({
     credentials:true,
-    origin:['http://192.168.1.141:4200']
+    origin:['http://192.168.1.141:4200', 'http://localhost:4200']
 }))
 
-app.use('/api/users', userRouter)
-app.use('/api/projects/', projectRouter)
+
+
+// routes
+app.use('/api/auth', authRouter)
+app.use('/api/users', checkAuth, userRouter)
+app.use('/api/projects/', checkAuth, projectRouter)
 
 app.listen(5000, () => {
     console.log(`Website served on port 5000`)

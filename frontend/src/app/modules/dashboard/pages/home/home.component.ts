@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/User';
 
@@ -13,17 +14,15 @@ export class HomeComponent implements OnInit {
 
   showInvitations = false;
 
-  constructor(private userService: UserService) {
+  constructor(private authService: AuthService, private userService: UserService) {
 
-    // console.log(userService.currentUser.id)
-
-    userService.getUserById(userService.currentUser.id).subscribe({
+    userService.getUserById(authService.currentUser.id).subscribe({
       next: (user: User) => {
         this.user = user
         console.log(user)
       },
       error: (error) => {
-        console.error(error.response)
+        console.error(error)
       }
     })
     

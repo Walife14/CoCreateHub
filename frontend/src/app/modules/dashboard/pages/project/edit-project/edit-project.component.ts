@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/User';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/shared/interfaces/Project';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-edit-project',
@@ -22,8 +23,8 @@ export class EditProjectComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private userService: UserService,
     private activatedRoute: ActivatedRoute, private router: Router,
-    private projectService: ProjectService) {
-    userService.getUserById(userService.currentUser.id).subscribe((user: User) => {
+    private projectService: ProjectService, private authService: AuthService) {
+    userService.getUserById(authService.currentUser.id).subscribe((user: User) => {
       this.user = user
     })
 

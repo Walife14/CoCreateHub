@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { IUserRegister } from 'src/app/shared/interfaces/IUserRegister';
 import { PasswordsMatchValidator } from 'src/app/shared/validators/password_match_validator';
 
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   returnUrl = ''
 
   constructor(
-    private formBuilder: FormBuilder, private userService: UserService,
+    private formBuilder: FormBuilder, private authService: AuthService,
     private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
       confirmPassword: fv.confirmPassword
     }
 
-    this.userService.register(user).subscribe(_ => {
+    this.authService.register(user).subscribe(_ => {
       this.router.navigateByUrl(this.returnUrl)
     })
   }

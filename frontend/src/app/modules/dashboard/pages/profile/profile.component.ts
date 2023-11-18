@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/User';
 import { forkJoin } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -20,14 +21,14 @@ export class ProfileComponent implements OnInit {
 
   id!: string;
 
-  constructor(private userService: UserService, private activatedRoute: ActivatedRoute) {
+  constructor(private authService: AuthService,private userService: UserService, private activatedRoute: ActivatedRoute) {
 
     // // get user based on id in route
     this.id = activatedRoute.snapshot.paramMap.get('id')!
 
     forkJoin({
       fetchedUser: userService.getUserById(this.id),
-      currentUser: userService.getUserById(userService.currentUser.id)
+      currentUser: userService.getUserById(authService.currentUser.id)
     }).subscribe((results) => {
       this.user = results.fetchedUser
       this.currentUser = results.currentUser

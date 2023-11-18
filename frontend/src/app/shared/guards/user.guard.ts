@@ -1,12 +1,12 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 export const userGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
-  const userService = inject(UserService)
+  const authService = inject(AuthService)
 
-  if(userService.currentUser.token) {
+  if(authService.currentUser.token) {
     router.navigate(['/dashboard'])
     return false
   }
