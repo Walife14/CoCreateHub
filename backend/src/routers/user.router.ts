@@ -1,7 +1,4 @@
 import { Router } from 'express'
-import asyncHandler from 'express-async-handler'
-import { UserModel } from '../models/user.model'
-import { ProjectModel } from '../models/project.model'
 const userController = require('../controllers/userController')
 
 const router = Router()
