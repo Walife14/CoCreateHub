@@ -71,7 +71,7 @@ export class AuthService {
 
   logout() {
     this.userSubject.next(new User())
-    localStorage.removeItem(USER_KEY)
+    localStorage.removeItem('User')
     window.location.reload()
   }
 

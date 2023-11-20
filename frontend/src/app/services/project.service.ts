@@ -14,17 +14,8 @@ export class ProjectService {
 
   constructor(private http: HttpClient, private userService: UserService, private authService: AuthService) { }
 
-  get httpOptions() {
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'x-auth-token': this.authService.currentUser.token || ''
-      })
-    }
-    return httpOptions
-  }
-
   getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(PROJECT_FETCH_ALL_URL, this.httpOptions).pipe(
+    return this.http.get<Project[]>(PROJECT_FETCH_ALL_URL).pipe(
       tap({
         next: (projects) => {
           console.log('We got all the projects!')
@@ -37,7 +28,7 @@ export class ProjectService {
   }
 
   createProject(newProject: IProjectCreate): Observable<IProjectCreate> {
-    return this.http.post<IProjectCreate>(PROJECT_CREATE_URL, newProject, this.httpOptions).pipe(
+    return this.http.post<IProjectCreate>(PROJECT_CREATE_URL, newProject).pipe(
       tap({
         next: (project) => {
           // Add the project to the creators/users DB document
@@ -58,7 +49,7 @@ export class ProjectService {
   }
 
   getProjectById(id: string): Observable<Project> {
-    return this.http.get<Project>(PROJECT_FETCH_BY_ID + id, this.httpOptions)
+    return this.http.get<Project>(PROJECT_FETCH_BY_ID + id)
     .pipe(
       tap({
         next: (project) => {
@@ -72,7 +63,7 @@ export class ProjectService {
   }
 
   updateProject(updateObject: any): Observable<any> {
-    return this.http.put<any>(PROJECT_UPDATE_URL, updateObject, this.httpOptions).pipe(
+    return this.http.put<any>(PROJECT_UPDATE_URL, updateObject).pipe(
       tap({
         next: (update) => {
           console.log("successfully updated project", update)
@@ -86,20 +77,7 @@ export class ProjectService {
 
   deleteProject(id: string) {
 
-    // const httpOptions = {
-    //   headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
-    //   body: { id: id}
-    // }
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'x-auth-token': this.authService.currentUser.token || '',
-        'Content-Type': 'application/json'
-      }),
-      body: { id }
-    }
-
-    return this.http.delete(PROJECT_DELETE_URL, httpOptions).pipe(
+    return this.http.delete(PROJECT_DELETE_URL, { body: { id }}).pipe(
       tap({
         next: (success) => {
           console.log(success)

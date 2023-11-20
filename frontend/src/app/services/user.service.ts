@@ -3,27 +3,17 @@ import { User } from '../shared/models/User';
 import { Observable, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { USER_BY_ID_URL, USER_HANDLE_INVITE, USER_PROJECT_INVITE, USER_UPDATE_URL, USER_VISIBLE_TRUE_URL } from '../shared/constants/urls';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
-
-  get httpOptions() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'x-auth-token': this.authService.currentUser.token || ''
-      })
-    }
-    return httpOptions
-  }
+  constructor(private http: HttpClient) {}
 
   // make an interface for updatedData and put it into the edit-profile component aswell
   update(updatedData: any): Observable<any> {
-    return this.http.put<any>(USER_UPDATE_URL, updatedData, this.httpOptions).pipe(
+    return this.http.put<any>(USER_UPDATE_URL, updatedData).pipe(
       tap({
         next: (update) => {
           console.log("successfully updated user", update)
@@ -36,11 +26,11 @@ export class UserService {
   }
   
   getUserById(id: string): Observable<any> {
-    return this.http.get<User>(USER_BY_ID_URL + id, this.httpOptions)
+    return this.http.get<User>(USER_BY_ID_URL + id)
   }
 
   getVisibleUsers(): Observable<User[]> {
-    return this.http.get<User[]>(USER_VISIBLE_TRUE_URL, this.httpOptions).pipe(
+    return this.http.get<User[]>(USER_VISIBLE_TRUE_URL).pipe(
       tap({
         next: (success) => {
           console.log("Successfully fetched users", success)
@@ -53,7 +43,7 @@ export class UserService {
   }
 
   inviteToProject(data: any): Observable<any> {
-    return this.http.put<any>(USER_PROJECT_INVITE, data, this.httpOptions).pipe(
+    return this.http.put<any>(USER_PROJECT_INVITE, data).pipe(
       tap({
         next: (success) => {
           console.log(success)
@@ -66,7 +56,7 @@ export class UserService {
   }
 
   handleProjectInvitation(invitationObj: any): Observable<any> {
-    return this.http.post<any>(USER_HANDLE_INVITE, invitationObj, this.httpOptions).pipe(
+    return this.http.post<any>(USER_HANDLE_INVITE, invitationObj).pipe(
       tap({
         next: (success) => {
           console.log(success)

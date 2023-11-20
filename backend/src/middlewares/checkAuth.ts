@@ -13,6 +13,6 @@ module.exports = async (req: Request, res: Response, next: NextFunction) => {
         res.locals.jwtUser = user
         next()
     } catch(error) {
-        return res.status(400).json({'message': 'Token invalid'})
+        return res.status(401).json({'message': 'Token invalid', 'error': error})
     }
 }

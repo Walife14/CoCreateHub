@@ -21,7 +21,7 @@ module.exports.create_post = async (req: Request, res: Response) => {
 
         // check if projectCreator id is the same as currentUser id in case someone
         // tries to create a project for someone else
-        if (projectFields.projectCreator.id != res.locals.jwtUser) throw "You can't create a project for someone else!"
+        if (!(projectFields.projectCreator.id === res.locals.jwtUser.id)) throw "You can't create a project for someone else!"
 
         const dbProject = await ProjectModel.create(projectFields)
 
