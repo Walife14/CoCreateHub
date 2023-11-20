@@ -8,7 +8,7 @@ const createTokenResponse = (id: string, email: string, name: string, isAdmin: b
     const token = jwt.sign({
         id, email, name, isAdmin},
         process.env.JWT_SECRET!, {
-        expiresIn: '10m'})
+        expiresIn: '2h'})
     
     return {
         id,

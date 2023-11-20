@@ -40,7 +40,7 @@ export class UserService {
   }
 
   getVisibleUsers(): Observable<User[]> {
-    return this.http.get<User[]>(USER_VISIBLE_TRUE_URL).pipe(
+    return this.http.get<User[]>(USER_VISIBLE_TRUE_URL, this.httpOptions).pipe(
       tap({
         next: (success) => {
           console.log("Successfully fetched users", success)
