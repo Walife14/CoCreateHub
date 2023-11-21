@@ -30,6 +30,11 @@ app.use(cors({
 
 
 // routes
+
+app.get('/', (req, res) => {
+    res.send('CoCreateHub')
+})
+
 app.use('/api/auth', authRouter)
 app.use('/api/users', checkAuth, userRouter)
 app.use('/api/projects/', checkAuth, projectRouter)
