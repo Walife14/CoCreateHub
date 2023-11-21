@@ -21,7 +21,9 @@ app.use(cors({
     'http://192.168.1.141:4200',
     'http://localhost:4200',
     'https://co-create-hub-241265baf158.herokuapp.com/',
-    'https://co-create-hub-241265baf158.herokuapp.com'
+    'https://co-create-hub-241265baf158.herokuapp.com',
+    'https://cocreatehub.space/',
+    'https://cocreatehub.space'
 ]
 }))
 
