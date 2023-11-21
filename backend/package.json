@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd src && nodemon server.ts",
+    "start": "cd src && ts-node server.ts",
+    "serve": "cd src && nodemon server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

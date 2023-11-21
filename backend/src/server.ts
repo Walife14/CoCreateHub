@@ -27,6 +27,6 @@ app.use('/api/auth', authRouter)
 app.use('/api/users', checkAuth, userRouter)
 app.use('/api/projects/', checkAuth, projectRouter)
 
-app.listen(5000, () => {
-    console.log(`Website served on port 5000`)
+app.listen(process.env.PORT || 5000, () => {
+    console.log(`Website served on port ${process.env.PORT || 5000}`)
 })
