@@ -1,6 +1,6 @@
 // const BASE_URL = 'http://localhost:5000'
 // const BASE_URL = 'http://192.168.1.141:5000'
-const BASE_URL = 'https://co-create-hub-2cdd62019c94.herokuapp.com'
+const BASE_URL = 'https://co-create-hub-8e4418f41d0e.herokuapp.com'
 
 // AUTH
 
