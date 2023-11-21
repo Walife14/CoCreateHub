@@ -16,15 +16,17 @@ const app = express()
 
 app.use(express.json())
 
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.cocreatehub.space/')
+})
+
 app.use(cors({
     credentials:true,
     origin:[
     'http://192.168.1.141:4200',
     'http://localhost:4200',
     'https://co-create-hub-241265baf158.herokuapp.com/',
-    'https://co-create-hub-241265baf158.herokuapp.com',
-    'https://cocreatehub.space/',
-    'https://cocreatehub.space'
+    'https://www.cocreatehub.space/',
 ]
 }))
 
