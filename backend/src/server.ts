@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import express from "express"
+import { Request, Response } from 'express'
 import cors from "cors"
 import authRouter from './routers/auth.router'
 import userRouter from "./routers/user.router"
@@ -31,7 +32,7 @@ app.use(cors({
 
 // routes
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.send('CoCreateHub')
 })
 
