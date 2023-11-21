@@ -17,7 +17,7 @@ app.use(express.json())
 
 app.use(cors({
     credentials:true,
-    origin:['http://192.168.1.141:4200', 'http://localhost:4200']
+    origin:['http://192.168.1.141:4200', 'http://localhost:4200', 'https://co-create-hub-241265baf158.herokuapp.com/']
 }))
 
 
