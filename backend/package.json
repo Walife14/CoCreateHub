@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/server.ts",
+  "engines": {
+    "node": "v18.16.0",
+    "npm": "9.6.6"
+  },
   "scripts": {
     "start": "node build/server.js",
     "serve": "cd src && nodemon server.ts",
