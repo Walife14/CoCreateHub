@@ -17,7 +17,12 @@ app.use(express.json())
 
 app.use(cors({
     credentials:true,
-    origin:['http://192.168.1.141:4200', 'http://localhost:4200', 'https://co-create-hub-241265baf158.herokuapp.com/']
+    origin:[
+    'http://192.168.1.141:4200',
+    'http://localhost:4200',
+    'https://co-create-hub-241265baf158.herokuapp.com/',
+    'https://co-create-hub-241265baf158.herokuapp.com'
+]
 }))
 
 
@@ -27,6 +32,6 @@ app.use('/api/auth', authRouter)
 app.use('/api/users', checkAuth, userRouter)
 app.use('/api/projects/', checkAuth, projectRouter)
 
-app.listen(process.env.PORT || 5000, () => {
-    console.log(`Website served on port ${process.env.PORT || 5000}`)
+app.listen(process.env.PORT || 80, () => {
+    console.log(`Website served on port ${process.env.PORT || 80}`)
 })
