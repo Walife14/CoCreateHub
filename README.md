@@ -16,7 +16,7 @@ To create a platform where developers and designers are able to find others to c
 
 ### Links
 
- - Live Site URL: https://wwww.cocreatehub.space
+ - Live Site URL: https://www.cocreatehub.space
 
 ### Built with
 
