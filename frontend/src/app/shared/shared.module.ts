@@ -5,7 +5,6 @@ import { InputValidationComponent } from './component/input-validation/input-val
 import { TextInputComponent } from './component/text-input/text-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DefaultButtonComponent } from './component/default-button/default-button.component';
-import { LoadingComponent } from './component/loading/loading.component';
 import { NavComponent } from './component/nav/nav.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { LinkComponent } from './component/link/link.component';
@@ -19,7 +18,6 @@ import { CardComponent } from './component/card/card.component';
     InputValidationComponent,
     TextInputComponent,
     DefaultButtonComponent,
-    LoadingComponent,
     NavComponent,
     LinkComponent,
     CardComponent
@@ -35,7 +33,6 @@ import { CardComponent } from './component/card/card.component';
     InputValidationComponent,
     TextInputComponent,
     DefaultButtonComponent,
-    LoadingComponent,
     NavComponent,
     LinkComponent,
     CardComponent

@@ -12,4 +12,6 @@ export class DefaultButtonComponent {
   @Input() inverted: boolean = false;
   @Output() onClick = new EventEmitter()
 
+  @Input() isLoading = false;
+
 }

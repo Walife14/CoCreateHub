@@ -1,8 +1,12 @@
 <div class="flex justify-center w-full">
     <button
-        class="outline-none font-medium py-2 px-4 min-w-[30%] mx-auto  transition-all cursor-pointer  rounded-md active:bg-red/80"
+        class="outline-none font-medium py-2 px-4 min-w-[30%] mx-auto  transition-all cursor-pointer  rounded-md active:bg-red/80 disabled:bg-dark-gray/75"
         [ngClass]="inverted ? 'bg-white text-red border border-red' : 'text-white bg-red border-none'"
         [type]="type"
         (click)="onClick.emit()"
-        >{{ text }}</button>
+        [disabled]="isLoading"
+        >
+        <span *ngIf="!isLoading">{{ text }}</span>
+        <span class="loading-spin" *ngIf="isLoading"></span>
+    </button>
 </div>

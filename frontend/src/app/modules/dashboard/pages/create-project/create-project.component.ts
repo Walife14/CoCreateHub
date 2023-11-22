@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
@@ -11,6 +12,8 @@ import { User } from 'src/app/shared/models/User';
   styleUrls: ['./create-project.component.css']
 })
 export class CreateProjectComponent implements OnInit {
+  isLoading = false;
+  errorMessage?: string;
 
   user!: User;
 
@@ -18,13 +21,14 @@ export class CreateProjectComponent implements OnInit {
   isSubmitted = false;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-    private projectService: ProjectService, private authService: AuthService) {
+    private projectService: ProjectService, private authService: AuthService,
+    private router: Router) {
       
     }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      title: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.minLength(4)]],
       description: ['', [Validators.required]],
     })
 
@@ -42,8 +46,9 @@ export class CreateProjectComponent implements OnInit {
 
   onSubmit() {
     this.isSubmitted = true
-
-    if (this.form.invalid || !this.user) return;
+    this.errorMessage = ''
+    if (this.form.invalid) return;
+    this.isLoading = true
 
     const projectCreator = {
       "id": this.user.id,
@@ -59,8 +64,15 @@ export class CreateProjectComponent implements OnInit {
       "members": [projectCreator]
     }
 
-    this.projectService.createProject(newProject).subscribe((project) => {
-      console.log(project)
+    this.projectService.createProject(newProject).subscribe({
+      next: (response) => {
+        this.isLoading = false
+        this.router.navigate([`/dashboard/projects/project/${response.id}`])
+      },
+      error: (error) => {
+        this.isLoading = false
+        this.errorMessage = error
+      }
     })
   }
 

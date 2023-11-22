@@ -15,8 +15,9 @@
         type="password"
         label="Password">
       </text-input>
-      <default-button text="Login"></default-button>
+      <default-button text="Login" [isLoading]="isLoading"></default-button>
     </form>
+    <p class="text-red text-center py-2" *ngIf="errorMessage">{{ errorMessage }}</p>
   </div>
   <div class="my-4">
     <span>Don't have an account? Click <a class="underline text-red" routerLink='/auth/register' [queryParams]="{returnUrl}">here</a> to register.</span>

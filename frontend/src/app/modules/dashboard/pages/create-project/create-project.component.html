@@ -1,18 +1,21 @@
-<div class="mx-2 flex flex-col items-center">
+<div class="mx-2 flex flex-col items-center md:mt-20">
   <h1 class="text-3xl underline">Create a new Project</h1>
-  <form class="mt-10 w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <text-input
-      [control]="fc.title"
-      [showErrorsWhen]="isSubmitted"
-      type="text"
-      label="Title">
-    ></text-input>
-    <text-input
-      [control]="fc.description"
-      [showErrorsWhen]="isSubmitted"
-      type="text"
-      label="Description">
-    ></text-input>
-    <default-button text="Create"></default-button>
-  </form>
+  <div class="w-full md:w-1/2">
+    <form class="mt-10 w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <text-input
+        [control]="fc.title"
+        [showErrorsWhen]="isSubmitted"
+        type="text"
+        label="Title">
+      ></text-input>
+      <text-input
+        [control]="fc.description"
+        [showErrorsWhen]="isSubmitted"
+        type="text"
+        label="Description">
+      ></text-input>
+      <default-button text="Create" [isLoading]="isLoading"></default-button>
+    </form>
+    <p class="text-red text-center py-2" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </div>
 </div>

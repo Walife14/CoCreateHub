@@ -1,22 +1,26 @@
 <div class="mx-2">
-  <div class="my-2">
-    <a routerLink="/dashboard/profile/edit">Would you like your profile to be discoverable here? Click here to update your profile visibility!</a>
+  <div *ngIf="users; else noUsers">
+    <div class="my-2">
+      <a routerLink="/dashboard/profile/edit">Would you like your profile to be discoverable here? Click here to update your profile visibility!</a>
+    </div>
+  
+    <h1 class="my-5">What skills are you looking for?</h1>
+    <span>---*Filter by tech will be added soon*---</span>
+  
+    <!-- User card to be implemented as a separate component in future -->
+    <ul class="my-5 lg:grid lg:grid-cols-2">
+      <li *ngFor="let user of users">
+        <app-card
+          [title]="user.name"
+          [text]="user.projectGoals!"
+          [link]="'/dashboard/profile/' + user.id"
+          [lines]="true"
+          [techs]="user.techs"
+        ></app-card>
+      </li>
+    </ul>
   </div>
-
-  <h1 class="my-5">What skills are you looking for?</h1>
-  <span>---*Filter by tech will be added soon*---</span>
-
-  <!-- User card to be implemented as a separate component in future -->
-  <ul class="my-5" *ngFor="let user of users">
-    <li>
-      <app-card
-        [title]="user.name"
-        [text]="user.projectGoals!"
-        [link]="'project/' + user.id"
-        [lines]="true"
-        [techs]="user.techs"
-      ></app-card>
-    </li>
-  </ul>
-
+  <ng-template #noUsers>
+    <p class="text-red">Couldn't find any users!</p>
+  </ng-template>
 </div>

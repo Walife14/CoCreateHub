@@ -13,7 +13,6 @@ export class FindCocreateBuddyComponent implements OnInit {
 
   constructor(private userService: UserService) {
     userService.getVisibleUsers().subscribe((users: User[]) => {
-      console.log(users)
       this.users = users
     })
   }

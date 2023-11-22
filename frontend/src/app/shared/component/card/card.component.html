@@ -1,7 +1,7 @@
 <div class="relative">
    <ng-container *ngIf="lines">
-      <div class="h-4/6 w-[1px] bg-light-gray absolute left-0 top-1/2 -translate-y-1/2"></div>
-      <div class="h-4/6 w-[1px] bg-light-gray absolute right-0 top-1/2 -translate-y-1/2"></div>
+      <div class="h-4/6 w-[1px] bg-light-gray absolute left-0 top-1/2 -translate-y-1/2 lg:hidden"></div>
+      <div class="h-4/6 w-[1px] bg-light-gray absolute right-0 top-1/2 -translate-y-1/2 lg:hidden"></div>
    </ng-container>
    <div class="border-light-gray border-[1px] rounded-xl" [ngClass]="lines ? 'w-5/6 mx-auto' : null">
       <div class="text-center font-semibold text-xl mx-4 my-1">{{ title }}</div>

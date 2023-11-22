@@ -1,7 +1,7 @@
 <div class="text-center flex flex-col gap-y-4">
   <h1 class="text-xl">Projects</h1>
   <a class="text-xl underline" routerLink="new">Create a new project</a>
-  <ul class="flex flex-col gap-y-2 w-4/5 mx-auto">
+  <ul class="flex flex-col gap-y-2 w-4/5 mx-auto lg:grid lg:grid-cols-2">
     <li *ngFor="let project of projects">
       <app-card [title]="project.title" [text]="project.description" [link]="'project/' + project.id" [lines]="true"></app-card>
     </li>

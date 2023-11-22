@@ -12,6 +12,9 @@ import { PasswordsMatchValidator } from 'src/app/shared/validators/password_matc
 })
 export class RegisterComponent implements OnInit {
 
+  isLoading = false;
+  errorMessage?: string;
+
   registerForm!: FormGroup;
   isSubmitted = false;
   returnUrl = ''
@@ -38,8 +41,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.isSubmitted = true;
+    this.isSubmitted = true
     if (this.registerForm.invalid) return;
+    this.isLoading = true
 
     const fv = this.registerForm.value
 
@@ -50,8 +54,20 @@ export class RegisterComponent implements OnInit {
       confirmPassword: fv.confirmPassword
     }
 
-    this.authService.register(user).subscribe(_ => {
-      this.router.navigateByUrl(this.returnUrl)
+    this.authService.register(user).subscribe({
+      next: (response) => {
+        this.isLoading = false
+        if(this.returnUrl) {
+          this.router.navigateByUrl(this.returnUrl)
+        } else {
+          this.router.navigate(['/dashboard/home'])
+        }
+      },
+      error: (error) => {
+        console.log(error)
+        this.isLoading = false
+        this.errorMessage = error.error.error
+      }
     })
   }
 

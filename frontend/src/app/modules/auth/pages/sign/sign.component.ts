@@ -10,6 +10,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignComponent implements OnInit {
 
+  isLoading = false;
+  errorMessage?: string;
+
   loginForm!: FormGroup;
   isSubmitted = false;
   returnUrl = ''
@@ -32,14 +35,25 @@ export class SignComponent implements OnInit {
   }
 
   onSubmit() {
-    this.isSubmitted = true;
+    this.isSubmitted = true
+    this.errorMessage = ''
+    
     if (this.loginForm.invalid) return;
+    this.isLoading = true
 
-    this.authService.login({
-      email: this.fc.email.value,
-      password: this.fc.password.value
-    }).subscribe(() => {
-      this.router.navigateByUrl(this.returnUrl)
+    this.authService.login({ email: this.fc.email.value, password: this.fc.password.value }).subscribe({
+      next: (response) => {
+        this.isLoading = false
+        if (this.returnUrl) {
+          this.router.navigateByUrl(this.returnUrl)
+        } else {
+          this.router.navigate(['/dashboard/home'])
+        }
+      },
+      error: (error) => {
+        this.isLoading = false
+        this.errorMessage = error.error.error
+      }
     })
   }
 

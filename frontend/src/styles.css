@@ -8,3 +8,9 @@
         @apply text-dark-gray;
     }
 }
+
+@layer components {
+    .loading-spin {
+        @apply h-4 w-4 inline-block border-t-2 border-b-2 border-white rounded-full animate-spin
+    }
+}
