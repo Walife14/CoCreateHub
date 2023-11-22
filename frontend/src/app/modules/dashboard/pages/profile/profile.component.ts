@@ -19,29 +19,24 @@ export class ProfileComponent implements OnInit {
   // is the current user the viewer of the user profile
   isProfileUser = false;
 
-  id!: string;
-
   constructor(private authService: AuthService,private userService: UserService, private activatedRoute: ActivatedRoute) {
 
     // // get user based on id in route
-    this.id = activatedRoute.snapshot.paramMap.get('id')!
+    activatedRoute.params.subscribe((route) => {
+      forkJoin({
+        fetchedUser: userService.getUserById(route.id),
+        currentUser: userService.getUserById(authService.currentUser.id)
+      }).subscribe((results) => {
+        this.user = results.fetchedUser
+        this.currentUser = results.currentUser
 
-    forkJoin({
-      fetchedUser: userService.getUserById(this.id),
-      currentUser: userService.getUserById(authService.currentUser.id)
-    }).subscribe((results) => {
-      this.user = results.fetchedUser
-      this.currentUser = results.currentUser
+        this.filterInviteToProjectsToDisplay()
 
-      // console.log(this.user)
-      // console.log(this.currentUser)
-      this.filterInviteToProjectsToDisplay()
-
-      if (this.user && this.currentUser) {
-        this.user.id === this.currentUser.id ? this.isProfileUser = true : this.isProfileUser = false
-      }
+        if (this.user && this.currentUser) {
+          this.user.id === this.currentUser.id ? this.isProfileUser = true : this.isProfileUser = false
+        }
+      })
     })
-
   }
 
   ngOnInit() {
