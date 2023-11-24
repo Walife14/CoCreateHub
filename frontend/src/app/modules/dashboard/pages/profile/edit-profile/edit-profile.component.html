@@ -1,5 +1,5 @@
-<div class="mt-10 mx-2">
-  <h1 class="text-xl font-semibold">Edit Profile</h1>
+<div class="mb-10 mx-2">
+  <h1 class="text-xl font-semibold text-center mb-2">Edit Profile</h1>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <text-input
@@ -32,15 +32,40 @@
       type="text"
       label="GitHub">
     </text-input>
-    <div>
-      <span>Visibility: </span>
-      <label>
-        <input type="radio" formControlName="visibility" [value]="true"> True
-      </label>
-      <label>
-        <input type="radio" formControlName="visibility" [value]="false"> False
-      </label>
+    
+    <div class="flex flex-col space-y-2 pb-4">
+      <span class="place-self-center">Visibility</span>
+      <!-- use a switch case in the future to remove uneccessary repetitions of code -->
+      <div class="flex items-center gap-x-2" *ngIf="form.controls['visibility'].hasError('bioShort')">
+        <svg class="stroke-red h-5" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.0001 39C30 39 39.0001 30 39.0001 20C39.0001 10 30 1 20.0001 1C10.0002 1 1 10 1.00012 20C1.00024 30 10.0002 39 20.0001 39Z"/>
+          <path d="M20 28V4.5M20 30.5L20.5 31L20 31.5L19.5 31L20 30.5Z" stroke-linejoin="round"/>
+        </svg>Bio is too short</div>
+      <div class="flex items-center gap-x-2" *ngIf="form.controls['visibility'].hasError('projectGoalsShort')">
+        <svg class="stroke-red h-5" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.0001 39C30 39 39.0001 30 39.0001 20C39.0001 10 30 1 20.0001 1C10.0002 1 1 10 1.00012 20C1.00024 30 10.0002 39 20.0001 39Z"/>
+          <path d="M20 28V4.5M20 30.5L20.5 31L20 31.5L19.5 31L20 30.5Z" stroke-linejoin="round"/>
+        </svg>Project goals is too short</div>
+      <div class="flex items-center gap-x-2" *ngIf="form.controls['visibility'].hasError('linkedinOrGithubNotProvided')">
+        <svg class="stroke-red h-5" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.0001 39C30 39 39.0001 30 39.0001 20C39.0001 10 30 1 20.0001 1C10.0002 1 1 10 1.00012 20C1.00024 30 10.0002 39 20.0001 39Z"/>
+          <path d="M20 28V4.5M20 30.5L20.5 31L20 31.5L19.5 31L20 30.5Z" stroke-linejoin="round"/>
+        </svg>Please provide either a GitHub or LinkgedIn url</div>
+      <div class="grid grid-cols-2 place-items-center">
+        <label class="relative w-full h-full flex justify-center gap-x-2 cursor-pointer border-t border-l border-b rounded-l-xl py-2 peer-checked:bg-red">
+          <input class="peer accent-red" type="radio" formControlName="visibility" [value]="true">
+          <!-- <input class="peer accent-red" type="radio" formControlName="visibility" [value]="true"> -->
+          True
+          <div class="absolute top-0 left-0 h-full w-full peer-checked:bg-light-gray/25 rounded-l-xl"></div>
+        </label>
+        <label class="relative w-full h-full flex justify-center gap-x-2 cursor-pointer border-t border-r border-b rounded-r-xl py-2">
+          <input class="peer accent-red" type="radio" formControlName="visibility" [value]="false">
+          False
+          <div class="absolute top-0 left-0 h-full w-full peer-checked:bg-light-gray/25 rounded-r-xl"></div>
+        </label>
+      </div>
     </div>
+
     <div>
       <div>Please add the tech you know. (HTML, CSS, JavaScript...)</div>
       <ng-container formArrayName="techs">
@@ -55,9 +80,8 @@
         </button>
       </ng-container>
     </div>
-
-
-    <default-button text="Update"></default-button>
+    <default-button text="Update" [isLoading]="isLoading"></default-button>
+    <span class="place-self-center" *ngIf="incorrectFields">Please check to make sure all fields are correct!</span>
   </form>
 
 </div>

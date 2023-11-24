@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/User';
+import { visibilityValidator } from 'src/app/shared/validators/visibility_validator';
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,12 +12,16 @@ import { User } from 'src/app/shared/models/User';
 })
 export class EditProfileComponent implements OnInit {
 
+  isLoading = false;
+
   form!: FormGroup;
 
   currentUser?: any;
   currentUserId?: string;
 
   isSubmitted = false;
+
+  incorrectFields = false;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.form = fb.group({
@@ -26,7 +31,7 @@ export class EditProfileComponent implements OnInit {
       linkedinUrl: (''),
       githubUrl: (''),
       visibility: (false),
-      techs: fb.array([], Validators.required)
+      techs: fb.array([])
     })
 
     this.currentUserId = JSON.parse(localStorage.getItem('User') ?? '{}').id
@@ -37,6 +42,15 @@ export class EditProfileComponent implements OnInit {
       })
     }
 
+    const visibilityControl = this.form.get('visibility')!
+    visibilityControl.valueChanges.subscribe(() => {
+      if (visibilityControl.value === true) {
+        this.form.setValidators(visibilityValidator('visibility', 'bio', 'projectGoals', 'linkedinUrl', 'githubUrl'))
+      } else {
+        this.form.setValidators(null)
+      }
+      this.form.updateValueAndValidity()
+    })
   }
 
   ngOnInit() {
@@ -48,6 +62,10 @@ export class EditProfileComponent implements OnInit {
 
   get techs() {
     return this.form.controls["techs"] as FormArray
+  }
+
+  get visibilityControl() {
+    return this.form.controls['visibility']
   }
 
   fillInputs(user: User) {
@@ -76,8 +94,10 @@ export class EditProfileComponent implements OnInit {
 
 
   onSubmit() {
-    if (!this.currentUser) return
+    if (this.form.invalid) this.incorrectFields = true
+    if (!this.currentUser || this.form.invalid) return
 
+    this.isLoading = true
     this.isSubmitted = true
     
     const fv = this.form.value
@@ -97,17 +117,18 @@ export class EditProfileComponent implements OnInit {
       techs: fv.techs
     }
         
-    this.userService.update(updatedProfile).subscribe(
-      (response) => {
-        console.log(response)
+    this.userService.update(updatedProfile).subscribe({
+      next: (response) => {
         setTimeout(() => {
+          this.isLoading = false
           this.router.navigate(['/dashboard/profile/' + this.currentUserId])
         }, 1000)
       },
-      (error) => {
+      error: (error) => {
+        this.isLoading = false
         console.error(error)
       }
-    )
+    })
   }
 
   ensureHttpOrHttps(input: string | undefined): string | undefined {
