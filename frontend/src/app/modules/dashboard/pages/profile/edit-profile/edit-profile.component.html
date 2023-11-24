@@ -33,8 +33,8 @@
       label="GitHub">
     </text-input>
     
-    <div class="flex flex-col space-y-2 pb-4">
-      <span class="place-self-center">Visibility</span>
+    <div class="my-2">
+      <div class="text-center mb-2"><span>Visibility</span></div>
       <!-- use a switch case in the future to remove uneccessary repetitions of code -->
       <div class="flex items-center gap-x-2" *ngIf="form.controls['visibility'].hasError('bioShort')">
         <svg class="stroke-red h-5" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,13 +52,13 @@
           <path d="M20 28V4.5M20 30.5L20.5 31L20 31.5L19.5 31L20 30.5Z" stroke-linejoin="round"/>
         </svg>Please provide either a GitHub or LinkgedIn url</div>
       <div class="grid grid-cols-2 place-items-center">
-        <label class="relative w-full h-full flex justify-center gap-x-2 cursor-pointer border-t border-l border-b rounded-l-xl py-2 peer-checked:bg-red">
+        <label class="relative w-full h-full flex justify-center items-center gap-x-2 cursor-pointer border-t border-l border-b rounded-l-xl py-2 peer-checked:bg-red">
           <input class="peer accent-red" type="radio" formControlName="visibility" [value]="true">
           <!-- <input class="peer accent-red" type="radio" formControlName="visibility" [value]="true"> -->
           True
           <div class="absolute top-0 left-0 h-full w-full peer-checked:bg-light-gray/25 rounded-l-xl"></div>
         </label>
-        <label class="relative w-full h-full flex justify-center gap-x-2 cursor-pointer border-t border-r border-b rounded-r-xl py-2">
+        <label class="relative w-full h-full flex justify-center items-center gap-x-2 cursor-pointer border-t border-r border-b rounded-r-xl py-2">
           <input class="peer accent-red" type="radio" formControlName="visibility" [value]="false">
           False
           <div class="absolute top-0 left-0 h-full w-full peer-checked:bg-light-gray/25 rounded-r-xl"></div>
