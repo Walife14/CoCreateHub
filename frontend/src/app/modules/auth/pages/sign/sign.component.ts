@@ -17,6 +17,8 @@ export class SignComponent implements OnInit {
   isSubmitted = false;
   returnUrl = ''
 
+  showAbout = false;
+
   constructor(
     private formBuilder: FormBuilder, private authService: AuthService,
     private activatedRoute: ActivatedRoute, private router: Router) { }
