@@ -2,6 +2,10 @@
 
 ## Overview
 
+### Test Account Credentials
+Email: test@email.com
+Password: 123456
+
 ### Mission
 
 To create a platform where developers and designers are able to find others to create and collaborate on projects together.
