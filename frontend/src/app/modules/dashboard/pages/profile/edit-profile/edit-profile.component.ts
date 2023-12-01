@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/User';
 import { visibilityValidator } from 'src/app/shared/validators/visibility_validator';
@@ -23,7 +24,7 @@ export class EditProfileComponent implements OnInit {
 
   incorrectFields = false;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private authService: AuthService) {
     this.form = fb.group({
       bio: (''),
       projectGoals: (''),
@@ -34,10 +35,10 @@ export class EditProfileComponent implements OnInit {
       techs: fb.array([])
     })
 
-    this.currentUserId = JSON.parse(localStorage.getItem('User') ?? '{}').id
-
-    if (this.currentUserId) {
-      userService.getUserById(this.currentUserId).subscribe((user: User) => {
+    if (authService.currentUser.id) {
+      userService.getUserById(authService.currentUser.id).subscribe((user: User) => {
+        this.currentUser = user
+        console.log(user)
         this.fillInputs(user)
       })
     }
@@ -69,17 +70,17 @@ export class EditProfileComponent implements OnInit {
   }
 
   fillInputs(user: User) {
-      this.currentUser = user
-      this.fc.bio.setValue(user.bio)
-      this.fc.projectGoals.setValue(user.projectGoals)
-      this.fc.websiteUrl.setValue(user.websiteUrl)
-      this.fc.linkedinUrl.setValue(user.linkedinUrl)
-      this.fc.githubUrl.setValue(user.githubUrl)
-      this.fc.visibility.setValue(user.visibility)
 
-      for(let i = 0; i < user.techs!.length; i++) {
-        this.addTech(user.techs![i])
-      }
+    this.fc.bio.setValue(user.bio)
+    this.fc.projectGoals.setValue(user.projectGoals)
+    this.fc.websiteUrl.setValue(user.websiteUrl)
+    this.fc.linkedinUrl.setValue(user.linkedinUrl)
+    this.fc.githubUrl.setValue(user.githubUrl)
+    this.fc.visibility.setValue(user.visibility)
+
+    for(let i = 0; i < user.techs!.length; i++) {
+      this.addTech(user.techs![i])
+    }
   }
 
   addTech(value?: string) {
@@ -121,7 +122,7 @@ export class EditProfileComponent implements OnInit {
       next: (response) => {
         setTimeout(() => {
           this.isLoading = false
-          this.router.navigate(['/dashboard/profile/' + this.currentUserId])
+          this.router.navigate(['/dashboard/profile/' + this.currentUser.id])
         }, 1000)
       },
       error: (error) => {

@@ -1,4 +1,4 @@
-<div class="mb-10 mx-2">
+<div class="mb-10 mx-2 lg:w-1/2">
   <h1 class="text-xl font-semibold text-center mb-2">Edit Profile</h1>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -50,11 +50,10 @@
         <svg class="stroke-red h-5" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M20.0001 39C30 39 39.0001 30 39.0001 20C39.0001 10 30 1 20.0001 1C10.0002 1 1 10 1.00012 20C1.00024 30 10.0002 39 20.0001 39Z"/>
           <path d="M20 28V4.5M20 30.5L20.5 31L20 31.5L19.5 31L20 30.5Z" stroke-linejoin="round"/>
-        </svg>Please provide either a GitHub or LinkgedIn url</div>
+        </svg>Please provide either a GitHub or LinkedIn</div>
       <div class="grid grid-cols-2 place-items-center">
         <label class="relative w-full h-full flex justify-center items-center gap-x-2 cursor-pointer border-t border-l border-b rounded-l-xl py-2 peer-checked:bg-red">
           <input class="peer accent-red" type="radio" formControlName="visibility" [value]="true">
-          <!-- <input class="peer accent-red" type="radio" formControlName="visibility" [value]="true"> -->
           True
           <div class="absolute top-0 left-0 h-full w-full peer-checked:bg-light-gray/25 rounded-l-xl"></div>
         </label>

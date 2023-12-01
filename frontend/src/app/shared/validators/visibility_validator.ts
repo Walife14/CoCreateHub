@@ -7,7 +7,7 @@ export function visibilityValidator(visibilityControlName: string, bioControlNam
 
         const bioControl = formGroup.get(bioControlName)!
         const projectGoalsControl = formGroup.get(projectGoalsControlName)!
-        const linkediUrlControl = formGroup.get(linkedinUrlControlName)!
+        const linkedinUrlControl = formGroup.get(linkedinUrlControlName)!
         const githubUrlControl = formGroup.get(githubUrlControlName)!
 
         const bioMinLength = 10
@@ -40,7 +40,7 @@ export function visibilityValidator(visibilityControlName: string, bioControlNam
         }
 
         // check if there is a github or linkedin url
-        if (linkediUrlControl.value.length > 10 || githubUrlControl.value.length > 10) {
+        if ((linkedinUrlControl.value && linkedinUrlControl.value.length > 10) || (githubUrlControl.value && githubUrlControl.value.length > 10)) {
             const errors = visibilityControl.errors! || {}
             delete errors.linkedinOrGithubNotProvided
             visibilityControl.setErrors({ ...errors })

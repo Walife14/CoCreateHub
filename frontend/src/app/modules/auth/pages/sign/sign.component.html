@@ -1,6 +1,16 @@
-<div class="mt-4 w-4/5 mx-auto flex flex-col justify-center md:w-1/2 md:mx-auto md:mt-20 lg:w-1/4">
-  <img src="../../../../../assets/logos/logo-lg.png" alt="CoCreateHub Logo">
-  <h1 class="text-center text-3xl my-4 font-semibold">Login</h1>
+<div class="mt-10 w-4/5 mx-auto flex flex-col justify-center md:w-1/2 md:mx-auto md:mt-20 lg:w-1/4">
+  <div class="absolute top-5 left-5 w-10 h-10 rounded-full shadow-[0_0_5px_rgba(0,0,0,0.5)] animate-float opacity-20 -z-10"></div>
+  <div class="absolute top-10 right-5 w-20 h-20 rounded-full shadow-[0_0_5px_rgba(0,0,0,0.5)] animate-float delay-1000 opacity-20 -z-10"></div>
+  <div class="absolute top-[50%] left-[20%] w-4 h-4 rounded-full shadow-[0_0_5px_rgba(0,0,0,0.5)] animate-float delay-700 opacity-20 -z-10"></div>
+  <div class="absolute bottom-4 left-2 w-4 h-4 rounded-full shadow-[0_0_5px_rgba(0,0,0,0.5)] animate-float delay-500 opacity-20 -z-10"></div>
+  <div class="absolute bottom-20 right-8 w-16 h-16 rounded-full shadow-[0_0_5px_rgba(0,0,0,0.5)] animate-float delay-1000 opacity-20 -z-10"></div>
+  <div class="flex flex-col items-center">
+    <svg width="43" height="43" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="14" cy="17.8293" rx="13" ry="13.6341" fill="#F13E3E" fill-opacity="0.5"/><ellipse cx="19" cy="20.9756" rx="19" ry="19.9268" fill="#F13E3E" fill-opacity="0.5"/><ellipse cx="25" cy="23.0732" rx="6" ry="6.29268" fill="#F13E3E"/><ellipse cx="22" cy="39.8537" rx="3" ry="3.14634" fill="#F13E3E"/><ellipse cx="36.5" cy="30.939" rx="1.5" ry="1.57317" fill="#F13E3E"/><ellipse cx="6.5" cy="29.8902" rx="3.5" ry="3.67073" fill="#F13E3E"/><ellipse cx="14.5" cy="4.71951" rx="3.5" ry="3.67073" fill="#F13E3E"/><ellipse cx="40.5" cy="16.2561" rx="2.5" ry="2.62195" fill="#F13E3E"/><ellipse cx="32.5" cy="3.67073" rx="3.5" ry="3.67073" fill="#F13E3E"/>
+    </svg>
+    <h1 class="font-bold text-3xl">CoCreateHub</h1>
+  </div>
+  <h2 class="text-center text-xl mt-4 mb-2 font-semibold">Login</h2>
   <div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <text-input
@@ -22,18 +32,17 @@
   <div class="my-4">
     <span>Don't have an account? Click <a class="underline text-red" routerLink='/auth/register' [queryParams]="{returnUrl}">here</a> to register.</span>
   </div>
-  <div class="flex">
-    <button class="text-red font-semibold text-xl mx-auto mt-20" type="button" (click)="showAbout = true">What is CoCreateHub?</button>
-    <div class="absolute top-0 left-0 h-[100dvh] transition-all opacity-0" [ngClass]="showAbout ? 'flex justify-center items-center opacity-100' : 'hidden'">
-      <div class="bg-white h-[95%] w-[95%] p-4 text-center shadow-[0px_0px_10px] shadow-light-gray rounded-xl">
-        <h1 class="text-red font-semibold text-3xl">CoCreateHub</h1>
-        <div class="flex flex-col gap-y-2 mt-10">
-          <p>A platform to find developers and designers, to help you learn whilst building projects together.</p>
-          <p>Create your account and edit your profile details so other developers and/or designers can find your profile.</p>
-          <p>Create a project and invite others to manage roles, tech stacks and other project information.</p>
-        </div>
-        <default-button class="flex mt-10" text="Okay" (click)="showAbout = false"></default-button>
-      </div>
+
+  <div class="absolute bottom-0 left-0 w-full">
+    <button class="block w-full py-4 text-red font-semibold text-xl" type="button" (click)="showAbout = true">What is CoCreateHub?</button>
+  </div>
+  <div class="fixed left-0 bottom-0 w-full max-h-0 transition-all bg-white border" [ngClass]=" showAbout ? 'max-h-screen px-2 py-6' : null">
+    <h1 class="font-semibold text-3xl">CoCreateHub is:</h1>
+    <div class="flex flex-col gap-y-2 mt-2">
+      <p>A platform to find developers and designers, to help you learn whilst building projects together.</p>
+      <p>Create your account and edit your profile details so other developers and/or designers can find your profile.</p>
+      <p>Create a project and invite others to manage roles, tech stacks and other project information.</p>
     </div>
+    <default-button class="flex mt-10" text="Okay" (click)="showAbout = false"></default-button>
   </div>
 </div>
