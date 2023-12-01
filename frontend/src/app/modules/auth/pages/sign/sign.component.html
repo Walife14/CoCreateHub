@@ -1,4 +1,4 @@
-<div class="mt-10 w-4/5 mx-auto flex flex-col justify-center md:w-1/2 md:mx-auto md:mt-20 lg:w-1/4">
+<div class="mt-10 w-4/5 mx-auto flex flex-col justify-center md:w-1/2 md:mx-auto md:mt-20 lg:w-1/4 lg:mt-0 lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:bg-light-gray/10 lg:px-4 lg:py-8 lg:rounded-lg">
   <div class="absolute top-5 left-5 w-10 h-10 rounded-full shadow-[0_0_5px_rgba(0,0,0,0.5)] animate-float opacity-20 -z-10"></div>
   <div class="absolute top-10 right-5 w-20 h-20 rounded-full shadow-[0_0_5px_rgba(0,0,0,0.5)] animate-float delay-1000 opacity-20 -z-10"></div>
   <div class="absolute top-[50%] left-[20%] w-4 h-4 rounded-full shadow-[0_0_5px_rgba(0,0,0,0.5)] animate-float delay-700 opacity-20 -z-10"></div>
@@ -32,12 +32,13 @@
   <div class="my-4">
     <span>Don't have an account? Click <a class="underline text-red" routerLink='/auth/register' [queryParams]="{returnUrl}">here</a> to register.</span>
   </div>
-
-  <div class="absolute bottom-0 left-0 w-full">
-    <button class="block w-full py-4 text-red font-semibold text-xl" type="button" (click)="showAbout = true">What is CoCreateHub?</button>
-  </div>
-  <div class="fixed left-0 bottom-0 w-full max-h-0 transition-all bg-white border" [ngClass]=" showAbout ? 'max-h-screen px-2 py-6' : null">
-    <h1 class="font-semibold text-3xl">CoCreateHub is:</h1>
+</div>
+<div class="absolute bottom-0 left-0 w-full">
+  <button class="block w-full py-4 text-red font-semibold text-xl" type="button" (click)="showAbout = true">What is CoCreateHub?</button>
+</div>
+<div class="fixed left-0 bottom-0 w-full max-h-0 transition-all bg-white border" [ngClass]=" showAbout ? 'max-h-screen px-2 py-6' : null">
+  <div class="lg:w-1/2 lg:mx-auto lg:my-20">
+    <h1 class="font-semibold text-3xl lg:text-center">CoCreateHub is:</h1>
     <div class="flex flex-col gap-y-2 mt-2">
       <p>A platform to find developers and designers, to help you learn whilst building projects together.</p>
       <p>Create your account and edit your profile details so other developers and/or designers can find your profile.</p>
