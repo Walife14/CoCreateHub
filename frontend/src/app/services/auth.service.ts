@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap, BehaviorSubject } from 'rxjs'
-import { AUTH_LOGIN_URL, AUTH_REGISTER_URL } from '../shared/constants/urls';
+import { AUTH_FORGOT_PASSWORD_URL, AUTH_LOGIN_URL, AUTH_REGISTER_URL, AUTH_RESET_PASSWORD_URL } from '../shared/constants/urls';
 import { User } from '../shared/models/User';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
 import { HttpClient } from '@angular/common/http';
@@ -73,6 +73,23 @@ export class AuthService {
     this.userSubject.next(new User())
     localStorage.removeItem('User')
     window.location.reload()
+  }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post<any>(AUTH_FORGOT_PASSWORD_URL, { email })
+  }
+
+  resetPassword(password: string, token: string): Observable<any> {
+    return this.http.post<any>(AUTH_RESET_PASSWORD_URL + token, { password }).pipe(
+      tap({
+        next: (success) => {
+          console.log(success.message)
+        },
+        error: (error) => {
+          console.error(error)
+        }
+      })
+    )
   }
 
 }

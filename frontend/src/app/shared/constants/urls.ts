@@ -1,5 +1,5 @@
 // const BASE_URL = 'http://localhost:5000'
-// const BASE_URL = 'http://192.168.1.141:5000'
+// const BASE_URL = 'http://192.168.1.141:3000'
 const BASE_URL = 'https://co-create-hub-322a98a4d13a.herokuapp.com'
 
 // AUTH
@@ -7,6 +7,10 @@ const BASE_URL = 'https://co-create-hub-322a98a4d13a.herokuapp.com'
 export const AUTH_LOGIN_URL = BASE_URL + '/api/auth/login'
 
 export const AUTH_REGISTER_URL = BASE_URL + '/api/auth/register'
+
+export const AUTH_FORGOT_PASSWORD_URL = BASE_URL + '/api/auth/forgot-password'
+
+export const AUTH_RESET_PASSWORD_URL = BASE_URL + '/api/auth/reset-password/'
 
 // USER
 

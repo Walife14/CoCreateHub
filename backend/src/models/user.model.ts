@@ -16,21 +16,9 @@ export interface User {
     visibility: boolean;
     projects?: {id: string, title: string, description: string, isProjectAdmin: boolean}[];
     invitations?: {user: {id: string, name: string}, project: {id: string, title: string, description: string}}[];
+    resetToken?: string;
+    resetTokenExpiry?: Date;
 }
-
-// export interface Project {
-//     id: string;
-//     title: string;
-//     description: string;
-//     createdAt: Date;
-//     members: ProjectUser[];
-//     projectCreator: ProjectUser;
-//     githubUrl: string;
-//     liveUrl: string;
-//     logoUrl: string;
-//     backgroundUrl: string;
-// }
-
 
 export const UserSchema = new Schema<User>({
     name: {type: String, required: true},
@@ -49,7 +37,9 @@ export const UserSchema = new Schema<User>({
     }]},
     invitations: {type: [{
         user: {id: String, name: String}, project: {id: String, title: String, description: String}
-    }], default: []}
+    }], default: []},
+    resetToken: String,
+    resetTokenExpiry: Date
 }, {
     timestamps: true,
     toJSON: {
