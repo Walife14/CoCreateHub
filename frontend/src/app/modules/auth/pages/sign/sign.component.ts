@@ -43,7 +43,7 @@ export class SignComponent implements OnInit {
     if (this.loginForm.invalid) return;
     this.isLoading = true
 
-    this.authService.login({ email: this.fc.email.value, password: this.fc.password.value }).subscribe({
+    this.authService.login({ email: this.fc.email.value.toLowerCase(), password: this.fc.password.value }).subscribe({
       next: (response) => {
         this.isLoading = false
         if (this.returnUrl) {
