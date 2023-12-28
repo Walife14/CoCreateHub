@@ -14,6 +14,10 @@ module.exports = {
         'red': '#F13E3E'
       },
 
+      backgroundImage: {
+        'developers': "url('/assets/images/developers-project.jpg')"
+      },
+
       animation: {
         float: 'floatAround 8s linear infinite',
         fade: 'fadeIn 0.3s linear'
